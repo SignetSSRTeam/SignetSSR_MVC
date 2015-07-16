@@ -22,6 +22,8 @@ namespace SignetSSRProject.Models
         public string Status { get; set; }
         public int CostOption { get; set; }
 
+        public string VieworDownload { get; set; }
+        
         public bool ContractLaborer { get; set; }
 
         public string month { get; set; }

@@ -67,6 +67,7 @@ namespace SignetSSRProject.Controllers
             string jobType = "Billable Hour";
             string beginDate = viewModel.rptBeginDate;
             string endDate = viewModel.rptEndDate;
+            string viewOrDownload = viewModel.VieworDownload;
             return Redirect("../Reports/Reportweb.aspx?JobType=" + jobType+ "&BeginDate=" + beginDate + "&EndDate=" + endDate);
         }
 
