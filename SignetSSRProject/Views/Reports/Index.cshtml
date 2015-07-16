@@ -64,6 +64,12 @@
 
                                         </div>
                                     </div>
+                                    
+                                    <div class="form-group">
+                                        <label class="col-md-2 control-label"> Render Report </label>                                        
+                                        @Html.RadioButton("VieworDownload", "view", new { @checked = "checked" }) View
+                                        @Html.RadioButton("VieworDownload", "download") Download &nbsp;                                        
+                                    </div>
         
                             </div>
                         }
