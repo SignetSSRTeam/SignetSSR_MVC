@@ -1,0 +1,79 @@
+﻿@using SignetSSRProject.Models
+@model WageHistory
+
+@{
+    Layout = null;
+}
+
+
+<div class="modal-header">
+    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+    <h4 class="modal-title" id="myModalLabel">Edit Wage History - @Html.DisplayFor(x => x.Employee.FirstName) @Html.DisplayFor(x => x.Employee.LastName)</h4>
+</div>
+<hr />
+
+<style type="text/css">
+    #jsGrid {
+        font-size: 11px;
+    }
+</style>
+
+<script>
+    var employeeID = '@ViewBag.employeeID';
+</script>
+
+<script src="/Scripts/Employees/wagehistory.js"></script>
+
+<div id="jsGrid">
+
+</div>
+
+@using (Html.BeginForm("saveWageHistory", "Employee", FormMethod.Post, new { @class = "modal-form", @role = "form" }))
+{
+    @Html.ValidationSummary()
+
+    <div class="modal-body">
+
+        
+
+        @*<div class="form-horizontal">
+            <div>
+                @Html.LabelFor(x => x.DateStart, htmlAttributes: new { @class = "control-label col-md-3" })
+                <div class="form-group">
+                    @Html.EditorFor(x => x.DateStart, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(x => x.DateStart)
+                </div>
+            </div>
+            <div>
+                @Html.LabelFor(x => x.DateEnd, htmlAttributes: new { @class = "control-label col-md-3" })
+                <div class="form-group">
+                    @Html.EditorFor(x => x.DateEnd, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(x => x.DateEnd)
+                </div>
+                </div>
+            <div>
+                @Html.LabelFor(x => x.WageRT, htmlAttributes: new { @class = "control-label col-md-3" })
+                <div class="form-group">
+                    @Html.EditorFor(x => x.WageRT, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(x => x.WageRT)
+                </div>
+                </div>
+            <div>
+                @Html.LabelFor(x => x.WageOT, htmlAttributes: new { @class = "control-label col-md-3" })
+                <div class="form-group">
+                    @Html.EditorFor(x => x.WageOT, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(x => x.WageOT)
+                </div>
+            </div>
+            @Html.HiddenFor(x => x.WageHistoryID)
+            @Html.HiddenFor(x => x.EmployeeID)
+            @Html.HiddenFor(x => x.IsCurrent)
+        </div>*@
+    </div>
+    <hr />
+    <div class="modal-footer">
+        <button class="btn btn-danger" data-dismiss="modal" aria-hidden="true">Undo</button>
+        <button class="btn btn-primary" type="submit">Save</button>
+    </div>
+
+}

@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="2da7c0c168734d9a9abe490cae02944d" Name="Diagram1">
+        <EntityTypeShape EntityType="ISC567_SSRS_DatabaseModel.Attendance" Width="1.5" PointX="5.25" PointY="9" IsExpanded="true" />
+        <EntityTypeShape EntityType="ISC567_SSRS_DatabaseModel.Customer" Width="1.5" PointX="0.75" PointY="4.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="ISC567_SSRS_DatabaseModel.Employee" Width="1.5" PointX="3" PointY="9.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="ISC567_SSRS_DatabaseModel.HoursWorked" Width="1.5" PointX="5.25" PointY="4.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="ISC567_SSRS_DatabaseModel.Job" Width="1.5" PointX="3" PointY="4.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="ISC567_SSRS_DatabaseModel.MaterialsExpense" Width="1.5" PointX="8.25" PointY="4.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="ISC567_SSRS_DatabaseModel.Rate" Width="1.5" PointX="0.75" PointY="1.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="ISC567_SSRS_DatabaseModel.WageHistory" Width="1.5" PointX="6.875" PointY="12.125" IsExpanded="true" />
+        <AssociationConnector Association="ISC567_SSRS_DatabaseModel.FK_Attendance_Employee" ManuallyRouted="false" />
+        <AssociationConnector Association="ISC567_SSRS_DatabaseModel.FK_Job_Customer" ManuallyRouted="false" />
+        <AssociationConnector Association="ISC567_SSRS_DatabaseModel.FK_HoursWorked_Employee" ManuallyRouted="false" />
+        <AssociationConnector Association="ISC567_SSRS_DatabaseModel.FK_WageHistory_Employee" ManuallyRouted="false" />
+        <AssociationConnector Association="ISC567_SSRS_DatabaseModel.FK_HoursWorked_Job" ManuallyRouted="false" />
+        <AssociationConnector Association="ISC567_SSRS_DatabaseModel.FK_Job_Rate" ManuallyRouted="false" />
+        <AssociationConnector Association="ISC567_SSRS_DatabaseModel.FK_MaterialsExpense_Job" ManuallyRouted="false" />
+        <AssociationConnector Association="ISC567_SSRS_DatabaseModel.FK_HoursWorked_WageHistory" />
+        <EntityTypeShape EntityType="ISC567_SSRS_DatabaseModel.LoginAudit" Width="1.5" PointX="3.375" PointY="0.75" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

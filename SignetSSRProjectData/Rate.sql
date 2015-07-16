@@ -1,0 +1,8 @@
+﻿CREATE TABLE [dbo].[Rate]
+(
+	[RateID] INT IDENTITY (1,1) PRIMARY KEY,
+	[JobType] VARCHAR(40) NOT NULL,
+	[Supervisor] Bit NOT NULL,
+	[RateRT] MONEY NOT NULL,
+	[RateOT] MONEY NOT NULL
+)

@@ -1,0 +1,61 @@
+﻿@model IEnumerable<SignetSSRProject.Models.Rate>
+
+@{
+    ViewBag.Title = "Rates";
+}
+
+<h2>Rates</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+    @using (Html.BeginForm())
+    {
+    <p>
+        <b>Job Type:</b>&nbsp;
+        <input type="text" style="display:inline-block" class="form-control" placeholder="Job Type" id="jn" name="JobType" value="">
+        <button type="submit" style="display:inline" class="btn btn-primary"><span class="glyphicon glyphicon-search"></span></button>
+
+    </p>
+    }
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.JobType)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Supervisor)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.RateRT)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.RateOT)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.JobType)
+        </td>
+        <td>
+
+            @Html.DisplayFor(modelItem => item.Supervisor)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.RateRT)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.RateOT)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.RateID }) |
+            @Html.ActionLink("Details", "Details", new { id=item.RateID }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.RateID })
+        </td>
+    </tr>
+}
+
+</table>

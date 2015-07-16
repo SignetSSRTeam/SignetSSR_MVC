@@ -1,0 +1,8 @@
+﻿@model Nullable<bool>
+
+@Html.DropDownList("", new SelectListItem[] { 
+new SelectListItem() { Text = "True", Value = "true" },
+new SelectListItem() { Text = "False", Value = "false" },
+new SelectListItem() { Text = "Not set", Value = "" }
+
+})

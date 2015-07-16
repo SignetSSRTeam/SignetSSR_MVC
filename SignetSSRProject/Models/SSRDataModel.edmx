@@ -1,0 +1,719 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="ISC567_SSRS_DatabaseModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Attendance">
+          <Key>
+            <PropertyRef Name="AttendanceID" />
+          </Key>
+          <Property Name="AttendanceID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="EmployeeID" Type="int" Nullable="false" />
+          <Property Name="Date" Type="datetime" Nullable="false" />
+          <Property Name="Attendance" Type="varchar" MaxLength="15" />
+          <Property Name="HoursMissed" Type="decimal" Precision="18" Scale="0" />
+          <Property Name="Reason" Type="nvarchar" MaxLength="100" />
+          <Property Name="Excused" Type="bit" />
+        </EntityType>
+        <EntityType Name="Customer">
+          <Key>
+            <PropertyRef Name="CustomerID" />
+          </Key>
+          <Property Name="CustomerID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="FirstName" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="LastName" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Company" Type="varchar" MaxLength="30" />
+          <Property Name="Title" Type="varchar" MaxLength="30" />
+          <Property Name="BusinessPhone" Type="char" MaxLength="15" />
+          <Property Name="HomePhone" Type="char" MaxLength="15" />
+          <Property Name="CellPhone" Type="char" MaxLength="15" />
+          <Property Name="FaxNumber" Type="char" MaxLength="15" />
+          <Property Name="EmailAddress" Type="varchar" MaxLength="60" />
+          <Property Name="Notes" Type="varchar" MaxLength="100" />
+        </EntityType>
+        <EntityType Name="Employee">
+          <Key>
+            <PropertyRef Name="EmployeeID" />
+          </Key>
+          <Property Name="EmployeeID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="FirstName" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="LastName" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="JobTitle" Type="varchar" MaxLength="30" Nullable="false" />
+          <Property Name="Supervisor" Type="bit" />
+          <Property Name="ContractLabor" Type="bit" />
+          <Property Name="WageRateRT" Type="money" />
+          <Property Name="WageRateOT" Type="money" />
+          <Property Name="HomePhone" Type="char" MaxLength="15" />
+          <Property Name="CellPhone" Type="char" MaxLength="15" />
+          <Property Name="Address" Type="varchar" MaxLength="100" />
+          <Property Name="EmailAddress" Type="varchar" MaxLength="60" />
+          <Property Name="Notes" Type="varchar" MaxLength="100" />
+        </EntityType>
+        <EntityType Name="HoursWorked">
+          <Key>
+            <PropertyRef Name="HoursWorkedID" />
+          </Key>
+          <Property Name="HoursWorkedID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="EmployeeID" Type="int" Nullable="false" />
+          <Property Name="JobID" Type="int" Nullable="false" />
+          <Property Name="ItemNumber" Type="int" />
+          <Property Name="WageHistoryID" Type="int" />
+          <Property Name="Date" Type="datetime" Nullable="false" />
+          <Property Name="HoursWorkedRT" Type="decimal" Precision="18" Scale="0" />
+          <Property Name="HoursWorkedOT" Type="decimal" Precision="18" Scale="0" />
+          <Property Name="JobDescription" Type="nvarchar" MaxLength="255" />
+        </EntityType>
+        <EntityType Name="Job">
+          <Key>
+            <PropertyRef Name="JobID" />
+          </Key>
+          <Property Name="JobID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="JobNumber" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="CustomerID" Type="int" Nullable="false" />
+          <Property Name="RateID" Type="int" Nullable="false" />
+          <Property Name="VesselName" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="ItemNumber" Type="int" />
+          <Property Name="Priority" Type="nvarchar" MaxLength="1" />
+          <Property Name="Status" Type="nvarchar" MaxLength="255" />
+          <Property Name="Description" Type="nvarchar(max)" />
+          <Property Name="StartDate" Type="datetime" />
+          <Property Name="EndDate" Type="datetime" />
+        </EntityType>
+        <EntityType Name="LoginAudit">
+          <Key>
+            <PropertyRef Name="LoginAuditID" />
+          </Key>
+          <Property Name="LoginAuditID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="UserName" Type="nvarchar(max)" />
+          <Property Name="Activity" Type="nvarchar" MaxLength="20" />
+          <Property Name="TimeRecorded" Type="datetime" />
+        </EntityType>
+        <EntityType Name="MaterialsExpense">
+          <Key>
+            <PropertyRef Name="MaterialsExpenseID" />
+          </Key>
+          <Property Name="MaterialsExpenseID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Expense" Type="money" Nullable="false" />
+          <Property Name="JobID" Type="int" Nullable="false" />
+          <Property Name="ItemNumber" Type="int" />
+          <Property Name="ExpenseDate" Type="datetime" />
+          <Property Name="InvoiceReceived" Type="bit" />
+          <Property Name="ExpenseDescription" Type="nvarchar" MaxLength="50" />
+          <Property Name="PONumber" Type="char" MaxLength="7" />
+          <Property Name="InvoiceNumber" Type="char" MaxLength="8" />
+          <Property Name="TaxIncluded" Type="bit" />
+          <Property Name="TaxPercentage" Type="decimal" Precision="18" Scale="0" />
+          <Property Name="MarkupPercentage" Type="decimal" Precision="18" Scale="0" />
+        </EntityType>
+        <EntityType Name="Rate">
+          <Key>
+            <PropertyRef Name="RateID" />
+          </Key>
+          <Property Name="RateID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="JobType" Type="nvarchar" MaxLength="40" Nullable="false" />
+          <Property Name="Supervisor" Type="bit" />
+          <Property Name="RateRT" Type="money" Nullable="false" />
+          <Property Name="RateOT" Type="money" Nullable="false" />
+          <Property Name="LaborHourlyCost" Type="decimal" Precision="18" Scale="0" />
+        </EntityType>
+        <EntityType Name="WageHistory">
+          <Key>
+            <PropertyRef Name="WageHistoryID" />
+          </Key>
+          <Property Name="WageHistoryID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="EmployeeID" Type="int" Nullable="false" />
+          <Property Name="WageRT" Type="int" Nullable="false" />
+          <Property Name="WageOT" Type="int" Nullable="false" />
+          <Property Name="DateStart" Type="date" />
+          <Property Name="DateEnd" Type="date" />
+          <Property Name="IsCurrent" Type="bit" Nullable="false" />
+        </EntityType>
+        <Association Name="FK_Attendance_Employee">
+          <End Role="Employee" Type="Self.Employee" Multiplicity="1" />
+          <End Role="Attendance" Type="Self.Attendance" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Employee">
+              <PropertyRef Name="EmployeeID" />
+            </Principal>
+            <Dependent Role="Attendance">
+              <PropertyRef Name="EmployeeID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_HoursWorked_Employee">
+          <End Role="Employee" Type="Self.Employee" Multiplicity="1" />
+          <End Role="HoursWorked" Type="Self.HoursWorked" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Employee">
+              <PropertyRef Name="EmployeeID" />
+            </Principal>
+            <Dependent Role="HoursWorked">
+              <PropertyRef Name="EmployeeID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_HoursWorked_Job">
+          <End Role="Job" Type="Self.Job" Multiplicity="1" />
+          <End Role="HoursWorked" Type="Self.HoursWorked" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Job">
+              <PropertyRef Name="JobID" />
+            </Principal>
+            <Dependent Role="HoursWorked">
+              <PropertyRef Name="JobID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_HoursWorked_WageHistory">
+          <End Role="WageHistory" Type="Self.WageHistory" Multiplicity="0..1" />
+          <End Role="HoursWorked" Type="Self.HoursWorked" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="WageHistory">
+              <PropertyRef Name="WageHistoryID" />
+            </Principal>
+            <Dependent Role="HoursWorked">
+              <PropertyRef Name="WageHistoryID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Job_Customer">
+          <End Role="Customer" Type="Self.Customer" Multiplicity="1" />
+          <End Role="Job" Type="Self.Job" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Customer">
+              <PropertyRef Name="CustomerID" />
+            </Principal>
+            <Dependent Role="Job">
+              <PropertyRef Name="CustomerID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Job_Rate">
+          <End Role="Rate" Type="Self.Rate" Multiplicity="1" />
+          <End Role="Job" Type="Self.Job" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Rate">
+              <PropertyRef Name="RateID" />
+            </Principal>
+            <Dependent Role="Job">
+              <PropertyRef Name="RateID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_MaterialsExpense_Job">
+          <End Role="Job" Type="Self.Job" Multiplicity="1" />
+          <End Role="MaterialsExpense" Type="Self.MaterialsExpense" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Job">
+              <PropertyRef Name="JobID" />
+            </Principal>
+            <Dependent Role="MaterialsExpense">
+              <PropertyRef Name="JobID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_WageHistory_Employee">
+          <End Role="Employee" Type="Self.Employee" Multiplicity="1" />
+          <End Role="WageHistory" Type="Self.WageHistory" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Employee">
+              <PropertyRef Name="EmployeeID" />
+            </Principal>
+            <Dependent Role="WageHistory">
+              <PropertyRef Name="EmployeeID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="ISC567_SSRS_DatabaseModelStoreContainer">
+          <EntitySet Name="Attendance" EntityType="Self.Attendance" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Customer" EntityType="Self.Customer" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Employee" EntityType="Self.Employee" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="HoursWorked" EntityType="Self.HoursWorked" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Job" EntityType="Self.Job" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="LoginAudit" EntityType="Self.LoginAudit" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="MaterialsExpense" EntityType="Self.MaterialsExpense" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Rate" EntityType="Self.Rate" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="WageHistory" EntityType="Self.WageHistory" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_Attendance_Employee" Association="Self.FK_Attendance_Employee">
+            <End Role="Employee" EntitySet="Employee" />
+            <End Role="Attendance" EntitySet="Attendance" />
+          </AssociationSet>
+          <AssociationSet Name="FK_HoursWorked_Employee" Association="Self.FK_HoursWorked_Employee">
+            <End Role="Employee" EntitySet="Employee" />
+            <End Role="HoursWorked" EntitySet="HoursWorked" />
+          </AssociationSet>
+          <AssociationSet Name="FK_HoursWorked_Job" Association="Self.FK_HoursWorked_Job">
+            <End Role="Job" EntitySet="Job" />
+            <End Role="HoursWorked" EntitySet="HoursWorked" />
+          </AssociationSet>
+          <AssociationSet Name="FK_HoursWorked_WageHistory" Association="Self.FK_HoursWorked_WageHistory">
+            <End Role="WageHistory" EntitySet="WageHistory" />
+            <End Role="HoursWorked" EntitySet="HoursWorked" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Job_Customer" Association="Self.FK_Job_Customer">
+            <End Role="Customer" EntitySet="Customer" />
+            <End Role="Job" EntitySet="Job" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Job_Rate" Association="Self.FK_Job_Rate">
+            <End Role="Rate" EntitySet="Rate" />
+            <End Role="Job" EntitySet="Job" />
+          </AssociationSet>
+          <AssociationSet Name="FK_MaterialsExpense_Job" Association="Self.FK_MaterialsExpense_Job">
+            <End Role="Job" EntitySet="Job" />
+            <End Role="MaterialsExpense" EntitySet="MaterialsExpense" />
+          </AssociationSet>
+          <AssociationSet Name="FK_WageHistory_Employee" Association="Self.FK_WageHistory_Employee">
+            <End Role="Employee" EntitySet="Employee" />
+            <End Role="WageHistory" EntitySet="WageHistory" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="ISC567_SSRS_DatabaseModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Attendance">
+          <Key>
+            <PropertyRef Name="AttendanceID" />
+          </Key>
+          <Property Name="AttendanceID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="EmployeeID" Type="Int32" Nullable="false" />
+          <Property Name="Date" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="Attendance1" Type="String" MaxLength="15" FixedLength="false" Unicode="false" />
+          <Property Name="HoursMissed" Type="Decimal" Precision="18" Scale="0" />
+          <Property Name="Reason" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="Excused" Type="Boolean" />
+          <NavigationProperty Name="Employee" Relationship="Self.FK_Attendance_Employee" FromRole="Attendance" ToRole="Employee" />
+        </EntityType>
+        <EntityType Name="Customer">
+          <Key>
+            <PropertyRef Name="CustomerID" />
+          </Key>
+          <Property Name="CustomerID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="FirstName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="LastName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Company" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+          <Property Name="Title" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+          <Property Name="BusinessPhone" Type="String" MaxLength="15" FixedLength="true" Unicode="false" />
+          <Property Name="HomePhone" Type="String" MaxLength="15" FixedLength="true" Unicode="false" />
+          <Property Name="CellPhone" Type="String" MaxLength="15" FixedLength="true" Unicode="false" />
+          <Property Name="FaxNumber" Type="String" MaxLength="15" FixedLength="true" Unicode="false" />
+          <Property Name="EmailAddress" Type="String" MaxLength="60" FixedLength="false" Unicode="false" />
+          <Property Name="Notes" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Jobs" Relationship="Self.FK_Job_Customer" FromRole="Customer" ToRole="Job" />
+        </EntityType>
+        <EntityType Name="Employee">
+          <Key>
+            <PropertyRef Name="EmployeeID" />
+          </Key>
+          <Property Name="EmployeeID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="FirstName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="LastName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="JobTitle" Type="String" MaxLength="30" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Supervisor" Type="Boolean" />
+          <Property Name="ContractLabor" Type="Boolean" />
+          <Property Name="WageRateRT" Type="Decimal" Precision="19" Scale="4" />
+          <Property Name="WageRateOT" Type="Decimal" Precision="19" Scale="4" />
+          <Property Name="HomePhone" Type="String" MaxLength="15" FixedLength="true" Unicode="false" />
+          <Property Name="CellPhone" Type="String" MaxLength="15" FixedLength="true" Unicode="false" />
+          <Property Name="Address" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="EmailAddress" Type="String" MaxLength="60" FixedLength="false" Unicode="false" />
+          <Property Name="Notes" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Attendances" Relationship="Self.FK_Attendance_Employee" FromRole="Employee" ToRole="Attendance" />
+          <NavigationProperty Name="HoursWorkeds" Relationship="Self.FK_HoursWorked_Employee" FromRole="Employee" ToRole="HoursWorked" />
+          <NavigationProperty Name="WageHistories" Relationship="Self.FK_WageHistory_Employee" FromRole="Employee" ToRole="WageHistory" />
+        </EntityType>
+        <EntityType Name="HoursWorked">
+          <Key>
+            <PropertyRef Name="HoursWorkedID" />
+          </Key>
+          <Property Name="HoursWorkedID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="EmployeeID" Type="Int32" Nullable="false" />
+          <Property Name="JobID" Type="Int32" Nullable="false" />
+          <Property Name="Date" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="HoursWorkedRT" Type="Decimal" Precision="18" Scale="0" />
+          <Property Name="HoursWorkedOT" Type="Decimal" Precision="18" Scale="0" />
+          <NavigationProperty Name="Employee" Relationship="Self.FK_HoursWorked_Employee" FromRole="HoursWorked" ToRole="Employee" />
+          <NavigationProperty Name="Job" Relationship="Self.FK_HoursWorked_Job" FromRole="HoursWorked" ToRole="Job" />
+          <Property Name="ItemNumber" Type="Int32" />
+          <Property Name="WageHistoryID" Type="Int32" />
+          <Property Name="JobDescription" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="WageHistory" Relationship="ISC567_SSRS_DatabaseModel.FK_HoursWorked_WageHistory" FromRole="HoursWorked" ToRole="WageHistory" />
+        </EntityType>
+        <EntityType Name="Job">
+          <Key>
+            <PropertyRef Name="JobID" />
+          </Key>
+          <Property Name="JobID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="JobNumber" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="CustomerID" Type="Int32" Nullable="false" />
+          <Property Name="RateID" Type="Int32" Nullable="false" />
+          <Property Name="VesselName" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Priority" Type="String" MaxLength="1" Unicode="true" FixedLength="false" />
+          <Property Name="Status" Type="String" MaxLength="255" Unicode="true" FixedLength="false" />
+          <Property Name="Description" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="StartDate" Type="DateTime" Precision="3" />
+          <Property Name="EndDate" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="Customer" Relationship="Self.FK_Job_Customer" FromRole="Job" ToRole="Customer" />
+          <NavigationProperty Name="HoursWorkeds" Relationship="Self.FK_HoursWorked_Job" FromRole="Job" ToRole="HoursWorked" />
+          <NavigationProperty Name="Rate" Relationship="Self.FK_Job_Rate" FromRole="Job" ToRole="Rate" />
+          <NavigationProperty Name="MaterialsExpenses" Relationship="Self.FK_MaterialsExpense_Job" FromRole="Job" ToRole="MaterialsExpense" />
+          <Property Name="ItemNumber" Type="Int32" />
+        </EntityType>
+        <EntityType Name="MaterialsExpense">
+          <Key>
+            <PropertyRef Name="MaterialsExpenseID" />
+          </Key>
+          <Property Name="MaterialsExpenseID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Expense" Type="Decimal" Precision="19" Scale="4" Nullable="false" />
+          <Property Name="JobID" Type="Int32" Nullable="false" />
+          <Property Name="ExpenseDescription" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="PONumber" Type="String" MaxLength="7" FixedLength="true" Unicode="false" />
+          <Property Name="InvoiceNumber" Type="String" MaxLength="8" FixedLength="true" Unicode="false" />
+          <Property Name="TaxIncluded" Type="Boolean" />
+          <Property Name="TaxPercentage" Type="Decimal" Precision="18" Scale="0" />
+          <Property Name="MarkupPercentage" Type="Decimal" Precision="18" Scale="0" />
+          <NavigationProperty Name="Job" Relationship="Self.FK_MaterialsExpense_Job" FromRole="MaterialsExpense" ToRole="Job" />
+          <Property Name="ItemNumber" Type="Int32" />
+          <Property Name="ExpenseDate" Type="DateTime" Precision="3" />
+          <Property Name="InvoiceReceived" Type="Boolean" />
+        </EntityType>
+        <EntityType Name="Rate">
+          <Key>
+            <PropertyRef Name="RateID" />
+          </Key>
+          <Property Name="RateID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="JobType" Type="String" MaxLength="40" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Supervisor" Type="Boolean" />
+          <Property Name="RateRT" Type="Decimal" Precision="19" Scale="4" Nullable="false" />
+          <Property Name="RateOT" Type="Decimal" Precision="19" Scale="4" Nullable="false" />
+          <NavigationProperty Name="Jobs" Relationship="Self.FK_Job_Rate" FromRole="Rate" ToRole="Job" />
+          <Property Name="LaborHourlyCost" Type="Decimal" Precision="18" Scale="0" />
+        </EntityType>
+        <EntityType Name="WageHistory">
+          <Key>
+            <PropertyRef Name="WageHistoryID" />
+          </Key>
+          <Property Name="WageHistoryID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="EmployeeID" Type="Int32" Nullable="false" />
+          <Property Name="WageRT" Type="Int32" Nullable="false" />
+          <Property Name="WageOT" Type="Int32" Nullable="false" />
+          <Property Name="DateStart" Type="DateTime" Precision="0" />
+          <Property Name="DateEnd" Type="DateTime" Precision="0" />
+          <Property Name="IsCurrent" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="Employee" Relationship="Self.FK_WageHistory_Employee" FromRole="WageHistory" ToRole="Employee" />
+          <NavigationProperty Name="HoursWorkeds" Relationship="ISC567_SSRS_DatabaseModel.FK_HoursWorked_WageHistory" FromRole="WageHistory" ToRole="HoursWorked" />
+        </EntityType>
+        <Association Name="FK_Attendance_Employee">
+          <End Role="Employee" Type="Self.Employee" Multiplicity="1" />
+          <End Role="Attendance" Type="Self.Attendance" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Employee">
+              <PropertyRef Name="EmployeeID" />
+            </Principal>
+            <Dependent Role="Attendance">
+              <PropertyRef Name="EmployeeID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Job_Customer">
+          <End Role="Customer" Type="Self.Customer" Multiplicity="1" />
+          <End Role="Job" Type="Self.Job" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Customer">
+              <PropertyRef Name="CustomerID" />
+            </Principal>
+            <Dependent Role="Job">
+              <PropertyRef Name="CustomerID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_HoursWorked_Employee">
+          <End Role="Employee" Type="Self.Employee" Multiplicity="1" />
+          <End Role="HoursWorked" Type="Self.HoursWorked" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Employee">
+              <PropertyRef Name="EmployeeID" />
+            </Principal>
+            <Dependent Role="HoursWorked">
+              <PropertyRef Name="EmployeeID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_WageHistory_Employee">
+          <End Role="Employee" Type="Self.Employee" Multiplicity="1" />
+          <End Role="WageHistory" Type="Self.WageHistory" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Employee">
+              <PropertyRef Name="EmployeeID" />
+            </Principal>
+            <Dependent Role="WageHistory">
+              <PropertyRef Name="EmployeeID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_HoursWorked_Job">
+          <End Role="Job" Type="Self.Job" Multiplicity="1" />
+          <End Role="HoursWorked" Type="Self.HoursWorked" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Job">
+              <PropertyRef Name="JobID" />
+            </Principal>
+            <Dependent Role="HoursWorked">
+              <PropertyRef Name="JobID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Job_Rate">
+          <End Role="Rate" Type="Self.Rate" Multiplicity="1" />
+          <End Role="Job" Type="Self.Job" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Rate">
+              <PropertyRef Name="RateID" />
+            </Principal>
+            <Dependent Role="Job">
+              <PropertyRef Name="RateID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_MaterialsExpense_Job">
+          <End Role="Job" Type="Self.Job" Multiplicity="1" />
+          <End Role="MaterialsExpense" Type="Self.MaterialsExpense" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Job">
+              <PropertyRef Name="JobID" />
+            </Principal>
+            <Dependent Role="MaterialsExpense">
+              <PropertyRef Name="JobID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="ISC567_SSRS_DatabaseEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Attendances" EntityType="Self.Attendance" />
+          <EntitySet Name="Customers" EntityType="Self.Customer" />
+          <EntitySet Name="Employees" EntityType="Self.Employee" />
+          <EntitySet Name="HoursWorkeds" EntityType="Self.HoursWorked" />
+          <EntitySet Name="Jobs" EntityType="Self.Job" />
+          <EntitySet Name="MaterialsExpenses" EntityType="Self.MaterialsExpense" />
+          <EntitySet Name="Rates" EntityType="Self.Rate" />
+          <EntitySet Name="WageHistories" EntityType="Self.WageHistory" />
+          <AssociationSet Name="FK_Attendance_Employee" Association="Self.FK_Attendance_Employee">
+            <End Role="Employee" EntitySet="Employees" />
+            <End Role="Attendance" EntitySet="Attendances" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Job_Customer" Association="Self.FK_Job_Customer">
+            <End Role="Customer" EntitySet="Customers" />
+            <End Role="Job" EntitySet="Jobs" />
+          </AssociationSet>
+          <AssociationSet Name="FK_HoursWorked_Employee" Association="Self.FK_HoursWorked_Employee">
+            <End Role="Employee" EntitySet="Employees" />
+            <End Role="HoursWorked" EntitySet="HoursWorkeds" />
+          </AssociationSet>
+          <AssociationSet Name="FK_WageHistory_Employee" Association="Self.FK_WageHistory_Employee">
+            <End Role="Employee" EntitySet="Employees" />
+            <End Role="WageHistory" EntitySet="WageHistories" />
+          </AssociationSet>
+          <AssociationSet Name="FK_HoursWorked_Job" Association="Self.FK_HoursWorked_Job">
+            <End Role="Job" EntitySet="Jobs" />
+            <End Role="HoursWorked" EntitySet="HoursWorkeds" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Job_Rate" Association="Self.FK_Job_Rate">
+            <End Role="Rate" EntitySet="Rates" />
+            <End Role="Job" EntitySet="Jobs" />
+          </AssociationSet>
+          <AssociationSet Name="FK_MaterialsExpense_Job" Association="Self.FK_MaterialsExpense_Job">
+            <End Role="Job" EntitySet="Jobs" />
+            <End Role="MaterialsExpense" EntitySet="MaterialsExpenses" />
+          </AssociationSet>
+          <AssociationSet Name="FK_HoursWorked_WageHistory" Association="ISC567_SSRS_DatabaseModel.FK_HoursWorked_WageHistory">
+            <End Role="WageHistory" EntitySet="WageHistories" />
+            <End Role="HoursWorked" EntitySet="HoursWorkeds" />
+          </AssociationSet>
+          <EntitySet Name="LoginAudits" EntityType="ISC567_SSRS_DatabaseModel.LoginAudit" />
+        </EntityContainer>
+        <Association Name="FK_HoursWorked_WageHistory">
+          <End Type="ISC567_SSRS_DatabaseModel.WageHistory" Role="WageHistory" Multiplicity="0..1" />
+          <End Type="ISC567_SSRS_DatabaseModel.HoursWorked" Role="HoursWorked" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="WageHistory">
+              <PropertyRef Name="WageHistoryID" />
+            </Principal>
+            <Dependent Role="HoursWorked">
+              <PropertyRef Name="WageHistoryID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="LoginAudit">
+          <Key>
+            <PropertyRef Name="LoginAuditID" />
+          </Key>
+          <Property Name="LoginAuditID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="UserName" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Activity" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="TimeRecorded" Type="DateTime" Precision="3" />
+        </EntityType>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="ISC567_SSRS_DatabaseModelStoreContainer" CdmEntityContainer="ISC567_SSRS_DatabaseEntities">
+          <EntitySetMapping Name="Attendances">
+            <EntityTypeMapping TypeName="ISC567_SSRS_DatabaseModel.Attendance">
+              <MappingFragment StoreEntitySet="Attendance">
+                <ScalarProperty Name="AttendanceID" ColumnName="AttendanceID" />
+                <ScalarProperty Name="EmployeeID" ColumnName="EmployeeID" />
+                <ScalarProperty Name="Date" ColumnName="Date" />
+                <ScalarProperty Name="Attendance1" ColumnName="Attendance" />
+                <ScalarProperty Name="HoursMissed" ColumnName="HoursMissed" />
+                <ScalarProperty Name="Reason" ColumnName="Reason" />
+                <ScalarProperty Name="Excused" ColumnName="Excused" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Customers">
+            <EntityTypeMapping TypeName="ISC567_SSRS_DatabaseModel.Customer">
+              <MappingFragment StoreEntitySet="Customer">
+                <ScalarProperty Name="CustomerID" ColumnName="CustomerID" />
+                <ScalarProperty Name="FirstName" ColumnName="FirstName" />
+                <ScalarProperty Name="LastName" ColumnName="LastName" />
+                <ScalarProperty Name="Company" ColumnName="Company" />
+                <ScalarProperty Name="Title" ColumnName="Title" />
+                <ScalarProperty Name="BusinessPhone" ColumnName="BusinessPhone" />
+                <ScalarProperty Name="HomePhone" ColumnName="HomePhone" />
+                <ScalarProperty Name="CellPhone" ColumnName="CellPhone" />
+                <ScalarProperty Name="FaxNumber" ColumnName="FaxNumber" />
+                <ScalarProperty Name="EmailAddress" ColumnName="EmailAddress" />
+                <ScalarProperty Name="Notes" ColumnName="Notes" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Employees">
+            <EntityTypeMapping TypeName="ISC567_SSRS_DatabaseModel.Employee">
+              <MappingFragment StoreEntitySet="Employee">
+                <ScalarProperty Name="EmployeeID" ColumnName="EmployeeID" />
+                <ScalarProperty Name="FirstName" ColumnName="FirstName" />
+                <ScalarProperty Name="LastName" ColumnName="LastName" />
+                <ScalarProperty Name="JobTitle" ColumnName="JobTitle" />
+                <ScalarProperty Name="Supervisor" ColumnName="Supervisor" />
+                <ScalarProperty Name="ContractLabor" ColumnName="ContractLabor" />
+                <ScalarProperty Name="WageRateRT" ColumnName="WageRateRT" />
+                <ScalarProperty Name="WageRateOT" ColumnName="WageRateOT" />
+                <ScalarProperty Name="HomePhone" ColumnName="HomePhone" />
+                <ScalarProperty Name="CellPhone" ColumnName="CellPhone" />
+                <ScalarProperty Name="Address" ColumnName="Address" />
+                <ScalarProperty Name="EmailAddress" ColumnName="EmailAddress" />
+                <ScalarProperty Name="Notes" ColumnName="Notes" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="HoursWorkeds">
+            <EntityTypeMapping TypeName="ISC567_SSRS_DatabaseModel.HoursWorked">
+              <MappingFragment StoreEntitySet="HoursWorked">
+                <ScalarProperty Name="JobDescription" ColumnName="JobDescription" />
+                <ScalarProperty Name="WageHistoryID" ColumnName="WageHistoryID" />
+                <ScalarProperty Name="ItemNumber" ColumnName="ItemNumber" />
+                <ScalarProperty Name="HoursWorkedID" ColumnName="HoursWorkedID" />
+                <ScalarProperty Name="EmployeeID" ColumnName="EmployeeID" />
+                <ScalarProperty Name="JobID" ColumnName="JobID" />
+                <ScalarProperty Name="Date" ColumnName="Date" />
+                <ScalarProperty Name="HoursWorkedRT" ColumnName="HoursWorkedRT" />
+                <ScalarProperty Name="HoursWorkedOT" ColumnName="HoursWorkedOT" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Jobs">
+            <EntityTypeMapping TypeName="ISC567_SSRS_DatabaseModel.Job">
+              <MappingFragment StoreEntitySet="Job">
+                <ScalarProperty Name="ItemNumber" ColumnName="ItemNumber" />
+                <ScalarProperty Name="JobID" ColumnName="JobID" />
+                <ScalarProperty Name="JobNumber" ColumnName="JobNumber" />
+                <ScalarProperty Name="CustomerID" ColumnName="CustomerID" />
+                <ScalarProperty Name="RateID" ColumnName="RateID" />
+                <ScalarProperty Name="VesselName" ColumnName="VesselName" />
+                <ScalarProperty Name="Priority" ColumnName="Priority" />
+                <ScalarProperty Name="Status" ColumnName="Status" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="StartDate" ColumnName="StartDate" />
+                <ScalarProperty Name="EndDate" ColumnName="EndDate" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="MaterialsExpenses">
+            <EntityTypeMapping TypeName="ISC567_SSRS_DatabaseModel.MaterialsExpense">
+              <MappingFragment StoreEntitySet="MaterialsExpense">
+                <ScalarProperty Name="InvoiceReceived" ColumnName="InvoiceReceived" />
+                <ScalarProperty Name="ExpenseDate" ColumnName="ExpenseDate" />
+                <ScalarProperty Name="ItemNumber" ColumnName="ItemNumber" />
+                <ScalarProperty Name="MaterialsExpenseID" ColumnName="MaterialsExpenseID" />
+                <ScalarProperty Name="Expense" ColumnName="Expense" />
+                <ScalarProperty Name="JobID" ColumnName="JobID" />
+                <ScalarProperty Name="ExpenseDescription" ColumnName="ExpenseDescription" />
+                <ScalarProperty Name="PONumber" ColumnName="PONumber" />
+                <ScalarProperty Name="InvoiceNumber" ColumnName="InvoiceNumber" />
+                <ScalarProperty Name="TaxIncluded" ColumnName="TaxIncluded" />
+                <ScalarProperty Name="TaxPercentage" ColumnName="TaxPercentage" />
+                <ScalarProperty Name="MarkupPercentage" ColumnName="MarkupPercentage" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Rates">
+            <EntityTypeMapping TypeName="ISC567_SSRS_DatabaseModel.Rate">
+              <MappingFragment StoreEntitySet="Rate">
+                <ScalarProperty Name="LaborHourlyCost" ColumnName="LaborHourlyCost" />
+                <ScalarProperty Name="RateID" ColumnName="RateID" />
+                <ScalarProperty Name="JobType" ColumnName="JobType" />
+                <ScalarProperty Name="Supervisor" ColumnName="Supervisor" />
+                <ScalarProperty Name="RateRT" ColumnName="RateRT" />
+                <ScalarProperty Name="RateOT" ColumnName="RateOT" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="WageHistories">
+            <EntityTypeMapping TypeName="ISC567_SSRS_DatabaseModel.WageHistory">
+              <MappingFragment StoreEntitySet="WageHistory">
+                <ScalarProperty Name="WageHistoryID" ColumnName="WageHistoryID" />
+                <ScalarProperty Name="EmployeeID" ColumnName="EmployeeID" />
+                <ScalarProperty Name="WageRT" ColumnName="WageRT" />
+                <ScalarProperty Name="WageOT" ColumnName="WageOT" />
+                <ScalarProperty Name="DateStart" ColumnName="DateStart" />
+                <ScalarProperty Name="DateEnd" ColumnName="DateEnd" />
+                <ScalarProperty Name="IsCurrent" ColumnName="IsCurrent" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="LoginAudits">
+            <EntityTypeMapping TypeName="ISC567_SSRS_DatabaseModel.LoginAudit">
+              <MappingFragment StoreEntitySet="LoginAudit">
+                <ScalarProperty Name="TimeRecorded" ColumnName="TimeRecorded" />
+                <ScalarProperty Name="Activity" ColumnName="Activity" />
+                <ScalarProperty Name="UserName" ColumnName="UserName" />
+                <ScalarProperty Name="LoginAuditID" ColumnName="LoginAuditID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

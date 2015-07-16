@@ -1,0 +1,91 @@
+﻿@model IEnumerable<SignetSSRProject.Models.Customer>
+
+@{
+    ViewBag.Title = "Customers";
+}
+
+<h2>Customers</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+    @using (Html.BeginForm())
+    {
+    <p>
+        @*FirstName: @Html.TextBox("FirstName")&nbsp;
+        LastName: @Html.TextBox("LastName")&nbsp;
+        Company: @Html.TextBox("Company")&nbsp;
+        Title: @Html.TextBox("CustTitle") <br />
+        <input type="submit" value="Filter" />*@
+
+
+        <b>First name:</b>&nbsp;
+        <input type="text" style="display:inline-block" class="form-control" placeholder="First Name" name="FirstName" value="">
+        <b>Last name:</b>&nbsp;
+        <input type="text" style="display:inline-block" class="form-control" placeholder="Last Name" name="LastName" value="">
+        <b>Company:</b>&nbsp;
+        <input type="text" style="display:inline-block" class="form-control" placeholder="Company" name="Company" value="">
+        @*<b>Title:</b>&nbsp;
+        <input type="text" style="display:inline-block" class="form-control" placeholder="Title" name="CustTitle" value="">*@
+
+        <button type="submit" style="display:inline" class="btn btn-primary"><span class="glyphicon glyphicon-search"></span></button>
+    </p><br/>
+    }
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.FirstName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.LastName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Company)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Title)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.BusinessPhone)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.CellPhone)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.EmailAddress)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.FirstName)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.LastName)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Company)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Title)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.BusinessPhone)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.CellPhone)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.EmailAddress)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.CustomerID }) |
+            @Html.ActionLink("Details", "Details", new { id=item.CustomerID }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.CustomerID })
+        </td>
+    </tr>
+}
+
+</table>
