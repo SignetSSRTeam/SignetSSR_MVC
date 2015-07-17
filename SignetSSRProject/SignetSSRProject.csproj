@@ -224,6 +224,13 @@
       <DependentUpon>SSRDataModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Reports\Master RVC.aspx.cs">
+      <DependentUpon>Master RVC.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Reports\Master RVC.aspx.designer.cs">
+      <DependentUpon>Master RVC.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Reports\ReportCustomize.aspx.cs">
       <DependentUpon>ReportCustomize.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -297,6 +304,7 @@
     <Content Include="Images\SignetMagic.jpg" />
     <Content Include="Images\SignetTugs.jpg" />
     <Content Include="Images\SignetWarhorse.jpg" />
+    <Content Include="Reports\Master RVC.aspx" />
     <Content Include="Reports\ReportCustomize.aspx" />
     <Content Include="Reports\ReportList.aspx" />
     <Content Include="Reports\Reportweb.aspx" />
