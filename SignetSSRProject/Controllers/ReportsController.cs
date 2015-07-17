@@ -65,8 +65,8 @@ namespace SignetSSRProject.Controllers
         {
             //int jobType = viewModel.RateID;
             string jobType = "Billable Hour";
-            string beginDate = viewModel.rptBeginDate;
-            string endDate = viewModel.rptEndDate;
+            string beginDate = viewModel.rpt1BeginDate;
+            string endDate = viewModel.rpt1EndDate;
             string viewOrDownload = viewModel.VieworDownload;
             return Redirect("../Reports/Reportweb.aspx?JobType=" + jobType+ "&BeginDate=" + beginDate + "&EndDate=" + endDate);
         }
@@ -76,7 +76,7 @@ namespace SignetSSRProject.Controllers
         public ActionResult Rpt2ProjectHoursWeekly(ReportViewModel viewModel)
         {
             
-            string date = viewModel.rptDate;
+            string date = viewModel.rpt2Date;
             return Redirect("../Reports/Reportweb.aspx?Date=" + date);
         }
 
@@ -94,8 +94,8 @@ namespace SignetSSRProject.Controllers
         public ActionResult Rpt4HoursWorkedByEmployee(ReportViewModel viewModel)
         {            
             int employeeID = viewModel.EmployeeID;
-            string beginDate = viewModel.rptBeginDate;
-            string endDate = viewModel.rptEndDate;
+            string beginDate = viewModel.rpt4BeginDate;
+            string endDate = viewModel.rpt4EndDate;
             return Redirect("../Reports/Reportweb.aspx?JobType=" + employeeID + "&BeginDate=" + beginDate + "&EndDate=" + endDate);
         }
 
@@ -104,7 +104,7 @@ namespace SignetSSRProject.Controllers
         public ActionResult Rpt5EmployeeHoursWeekly(ReportViewModel viewModel)
         {
             bool contractLaborer = viewModel.ContractLaborer;
-            string date = viewModel.rptDate;
+            string date = viewModel.rpt5Date;
             return Redirect("../Reports/Reportweb.aspx?ContractLaborer=" + contractLaborer + "&Date=" + date );
         }
 
@@ -116,8 +116,8 @@ namespace SignetSSRProject.Controllers
             int jobID = viewModel.JobID;
             int costOption = viewModel.CostOption;
             string status = viewModel.Status;
-            string beginDate = viewModel.rptBeginDate;
-            string endDate = viewModel.rptEndDate;
+            string beginDate = viewModel.rpt6BeginDate;
+            string endDate = viewModel.rpt6EndDate;
             return Redirect("../Reports/Reportweb.aspx?JobID=" + jobID + "&CostOption=" + costOption + "&Status=" + status + "&BeginDate=" + beginDate + "&EndDate=" + endDate);
         }
 
@@ -126,8 +126,8 @@ namespace SignetSSRProject.Controllers
         public ActionResult Rpt7MaterialsExpense(ReportViewModel viewModel)
         {
             int jobID = viewModel.JobID;
-            string beginDate = viewModel.rptBeginDate;
-            string endDate = viewModel.rptEndDate;
+            string beginDate = viewModel.rpt7BeginDate;
+            string endDate = viewModel.rpt7EndDate;
             return Redirect("../Reports/Reportweb.aspx?JobID=" + jobID + "&BeginDate=" + beginDate + "&EndDate=" + endDate);
         }
 
@@ -136,8 +136,8 @@ namespace SignetSSRProject.Controllers
         public ActionResult Rpt8AbsenceAndTardiness(ReportViewModel viewModel)
         {
             int employeeID = viewModel.EmployeeID;
-            string beginDate = viewModel.rptBeginDate;
-            string endDate = viewModel.rptEndDate;
+            string beginDate = viewModel.rpt8BeginDate;
+            string endDate = viewModel.rpt8EndDate;
             return Redirect("../Reports/Reportweb.aspx?EmployeeID=" + employeeID + "&BeginDate=" + beginDate + "&EndDate=" + endDate);
         }
 

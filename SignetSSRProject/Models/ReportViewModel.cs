@@ -29,9 +29,18 @@ namespace SignetSSRProject.Models
         public string month { get; set; }
         public int year { get; set; }
 
-        public string rptBeginDate { get; set; }
-        public string rptEndDate { get; set; }
-        public string rptDate { get; set; }
+        public string rpt1BeginDate { get; set; }
+        public string rpt1EndDate { get; set; }
+        public string rpt2Date { get; set; }
+        public string rpt4BeginDate { get; set; }
+        public string rpt4EndDate { get; set; }
+        public string rpt5Date { get; set; }
+        public string rpt6BeginDate { get; set; }
+        public string rpt6EndDate { get; set; }
+        public string rpt7BeginDate { get; set; }
+        public string rpt7EndDate { get; set; }
+        public string rpt8BeginDate { get; set; }
+        public string rpt8EndDate { get; set; }
 
         
     }
