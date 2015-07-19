@@ -5,4 +5,8 @@
         $target = $('#' + $input.attr('data-toggle'));
         $target.slideToggle();
     });
+
+    $('[name=RateID]').dropdown();
+    $('[name=EmployeeID]').dropdown();
+    $('[name=JobID]').dropdown();
 });

@@ -14,6 +14,12 @@ namespace SignetSSRProject.Reports
         {
             if (!IsPostBack)
             {
+
+                System.Net.ServicePointManager.Expect100Continue = false;
+
+                ReportViewer1.ServerReport.ReportServerCredentials = new ReportServerNetworkCredentials(SSRCommon.ReportServerCredentials.REPORTSERVER_USERNAME, "Isc5672011");
+                ReportViewer1.ServerReport.ReportServerUrl = new Uri("http://192.245.222.208/ReportServer");
+
                 string rptname = HttpContext.Current.Request.QueryString["Reportname"];
                 if (rptname == "Total Project Hours Worked By Job Classification")
                 {
@@ -50,16 +56,20 @@ namespace SignetSSRProject.Reports
                     ReportViewer1.Visible = true;
                     ReportViewer1.ServerReport.ReportPath = string.Format(@"/SignetSSRReports/{0}", rptname);
                     ReportViewer1.ServerReport.Refresh();
-                    string eid = HttpContext.Current.Request.QueryString["eid"];
-                    string STID = HttpContext.Current.Request.QueryString["STID"];
-                    string EDT = HttpContext.Current.Request.QueryString["EDT"];
+                    string employeeID = HttpContext.Current.Request.QueryString["EmployeeID"];
+                    string beginDate = HttpContext.Current.Request.QueryString["BeginDate"];
+                    string endDate = HttpContext.Current.Request.QueryString["EndDate"];
                     ReportParameter[] parameters = new ReportParameter[3];
-                    ReportParameter parameid = new ReportParameter("eid", eid);
-                    ReportParameter paramSTID = new ReportParameter("STID", STID);
-                    ReportParameter paramEDT = new ReportParameter("EDT", EDT);
+
+                    string[] lsEmpID = employeeID.Split(',');                    
+                    ReportParameter parameid = new ReportParameter("EmployeeID");
+                    parameid.Values.AddRange(lsEmpID);                    
+                    
+                    ReportParameter paramSTID = new ReportParameter("StartDate", beginDate);
+                    ReportParameter paramEDT = new ReportParameter("EndDate", endDate);
+                    this.ReportViewer1.ServerReport.SetParameters(new ReportParameter[] { parameid });
                     //this.ReportViewer1.LocalReport.SetParameters(parameters);
 
-                    this.ReportViewer1.ServerReport.SetParameters(new ReportParameter[] { parameid });
                     this.ReportViewer1.ServerReport.SetParameters(new ReportParameter[] { paramSTID });
                     this.ReportViewer1.ServerReport.SetParameters(new ReportParameter[] { paramEDT });
                 }
@@ -107,12 +117,16 @@ namespace SignetSSRProject.Reports
                     string BeginDate = HttpContext.Current.Request.QueryString["BeginDate"];
                     string EndDate = HttpContext.Current.Request.QueryString["EndDate"];
                     ReportViewer1.ServerReport.Refresh();
+                    
                     ReportParameter[] parameters = new ReportParameter[5];
-                    ReportParameter paramJobID = new ReportParameter("JobID", JobID);
+                    string[] lsJobID = JobID.Split(',');
+                    ReportParameter paramJobID = new ReportParameter("JobID");
+                    paramJobID.Values.AddRange(lsJobID);
                     ReportParameter paramCostOption = new ReportParameter("CostOption", CostOption);
                     ReportParameter paramJobStatus = new ReportParameter("Status", Status);
                     ReportParameter paramBeginDate = new ReportParameter("BeginDate", BeginDate);
                     ReportParameter paramEndDate = new ReportParameter("EndDate", EndDate);
+                    
                     //this.ReportViewer1.LocalReport.SetParameters(parameters);
                     this.ReportViewer1.ServerReport.SetParameters(new ReportParameter[] { paramJobID });
                     this.ReportViewer1.ServerReport.SetParameters(new ReportParameter[] { paramCostOption });
@@ -147,8 +161,8 @@ namespace SignetSSRProject.Reports
                     string Year = HttpContext.Current.Request.QueryString["Year"];
                     ReportViewer1.ServerReport.Refresh();
                     ReportParameter[] parameters = new ReportParameter[2];
-                    ReportParameter parammonth = new ReportParameter("month", month);
-                    ReportParameter paramYear = new ReportParameter("Year", Year);
+                    ReportParameter parammonth = new ReportParameter("Month", month);
+                    ReportParameter paramYear = new ReportParameter("YEAR", Year);
                     //this.ReportViewer1.LocalReport.SetParameters(parameters);
                     this.ReportViewer1.ServerReport.SetParameters(new ReportParameter[] { parammonth });
                     this.ReportViewer1.ServerReport.SetParameters(new ReportParameter[] { paramYear });   

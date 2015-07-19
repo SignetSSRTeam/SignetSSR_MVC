@@ -15,9 +15,9 @@ namespace SignetSSRProject.Models
         public SignetSSRProject.Models.Job jobModel = new SignetSSRProject.Models.Job();
 
         //Declare report parameter properties
-        public int RateID { get; set; }
-        public int EmployeeID { get; set; }
-        public int JobID { get; set; }
+        public List<int> RateID { get; set; }
+        public List<int> EmployeeID { get; set; }
+        public List<int> JobID { get; set; }
 
         public string Status { get; set; }
         public int CostOption { get; set; }
