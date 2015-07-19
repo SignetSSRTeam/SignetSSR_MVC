@@ -54,8 +54,7 @@ namespace SignetSSRProject.Reports
                 }
                 if (rptname == "Hours Worked by Employee")
                 {
-                    bool isReportDownload = false;
-                    
+                    bool isReportDownload = true;                    
                     
                     ReportViewer1.Visible = true;
                     ReportViewer1.ServerReport.ReportPath = string.Format(@"/SignetSSRReports/{0}", rptname);
@@ -80,9 +79,11 @@ namespace SignetSSRProject.Reports
                     if (isReportDownload) 
                     {
                         ReportViewer1.Visible = false;
-                        lblMessage.Visible = true;
-                        string outputPath = "C:\\Users\\Ashwin\\Downloads\\PdfReport.pdf";
+                        string outputPath = String.Format("C:\\SignetReports\\{0} {1}.pdf", rptname, DateTime.Now.ToString("MM.dd.yyyy h.mm tt"));
 
+                        lblMessage.Text = String.Format("Report has been saved to {0}", outputPath);                            
+                        lblMessage.Visible = true;  
+                        
                         string mimeType;
                         string encoding;
                         string extension;
