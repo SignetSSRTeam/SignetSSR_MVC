@@ -8,6 +8,8 @@ using System.Web;
 using System.Web.Mvc;
 using System.Net;
 using System.Data.Entity.SqlServer;
+using System.IO;
+using Microsoft.Reporting.WebForms;
 
 namespace SignetSSRProject.Controllers
 {
@@ -79,6 +81,7 @@ namespace SignetSSRProject.Controllers
         {
             string rptname = "Project hours worked weely";
             string date = viewModel.rpt2Date;
+            string viewOrDownload = viewModel.VieworDownload;
             return Redirect("../Reports/Master RVC.aspx?Date=" + date + "&Reportname=" + rptname);
         }
 
@@ -89,6 +92,7 @@ namespace SignetSSRProject.Controllers
             string rptname = "Total Project Hours Worked on a given Month";
             int month = DateTime.ParseExact(viewModel.month, "MMMM", System.Globalization.CultureInfo.InvariantCulture).Month;
             int year = viewModel.year;
+            string viewOrDownload = viewModel.VieworDownload;
             return Redirect("../Reports/Master RVC.aspx?YEAR=" + year + "&Month=" + month + "&Reportname=" + rptname);
         }
 
@@ -101,6 +105,7 @@ namespace SignetSSRProject.Controllers
             var strEmployeeIDS = String.Join(",", employeeID.ToArray());
             string beginDate = viewModel.rpt4BeginDate;
             string endDate = viewModel.rpt4EndDate;
+            string viewOrDownload = viewModel.VieworDownload;
             return Redirect("../Reports/Master RVC.aspx?EmployeeID=" + strEmployeeIDS + "&BeginDate=" + beginDate + "&EndDate=" + endDate + "&Reportname=" + rptname);
         }
 
@@ -111,6 +116,7 @@ namespace SignetSSRProject.Controllers
             string rptname = "Employee Hours Worked Weekly";
             bool contractLaborer = viewModel.ContractLaborer;
             string date = viewModel.rpt5Date;
+            string viewOrDownload = viewModel.VieworDownload;
             return Redirect("../Reports/Master RVC.aspx?ContractLaborer=" + contractLaborer + "&Date=" + date + "&Reportname=" + rptname);
         }
 
@@ -125,6 +131,7 @@ namespace SignetSSRProject.Controllers
             string status = viewModel.Status;
             string beginDate = viewModel.rpt6BeginDate;
             string endDate = viewModel.rpt6EndDate;
+            string viewOrDownload = viewModel.VieworDownload;
             return Redirect("../Reports/Master RVC.aspx?JobID=" + strJobIDS + "&CostOption=" + costOption + "&Status=" + status + "&BeginDate=" + beginDate + "&EndDate=" + endDate + "&Reportname=" + rptname);
         }
 
@@ -136,6 +143,7 @@ namespace SignetSSRProject.Controllers
             List<int> jobID = viewModel.JobID;
             string beginDate = viewModel.rpt7BeginDate;
             string endDate = viewModel.rpt7EndDate;
+            string viewOrDownload = viewModel.VieworDownload;
             return Redirect("../Reports/Master RVC.aspx?JobID=" + jobID + "&BeginDate=" + beginDate + "&EndDate=" + endDate + "&Reportname=" + rptname);
         }
 
@@ -147,6 +155,7 @@ namespace SignetSSRProject.Controllers
             List<int> employeeID = viewModel.EmployeeID;
             string beginDate = viewModel.rpt8BeginDate;
             string endDate = viewModel.rpt8EndDate;
+            string viewOrDownload = viewModel.VieworDownload;
             return Redirect("../Reports/Master RVC.aspx?EmployeeID=" + employeeID + "&BeginDate=" + beginDate + "&EndDate=" + endDate + "&Reportname=" + rptname);
         }
 
@@ -158,6 +167,7 @@ namespace SignetSSRProject.Controllers
 
             return costOption;
         }
+
     }
 }
 

@@ -1,6 +1,7 @@
 ﻿using Microsoft.Reporting.WebForms;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Web;
 using System.Web.UI;
@@ -53,6 +54,9 @@ namespace SignetSSRProject.Reports
                 }
                 if (rptname == "Hours Worked by Employee")
                 {
+                    bool isReportDownload = false;
+                    
+                    
                     ReportViewer1.Visible = true;
                     ReportViewer1.ServerReport.ReportPath = string.Format(@"/SignetSSRReports/{0}", rptname);
                     ReportViewer1.ServerReport.Refresh();
@@ -72,6 +76,31 @@ namespace SignetSSRProject.Reports
 
                     this.ReportViewer1.ServerReport.SetParameters(new ReportParameter[] { paramSTID });
                     this.ReportViewer1.ServerReport.SetParameters(new ReportParameter[] { paramEDT });
+
+                    if (isReportDownload) 
+                    {
+                        ReportViewer1.Visible = false;
+                        lblMessage.Visible = true;
+                        string outputPath = "C:\\Users\\Ashwin\\Downloads\\PdfReport.pdf";
+
+                        string mimeType;
+                        string encoding;
+                        string extension;
+                        string[] streams;
+                        Warning[] warnings;
+                        byte[] pdfBytes = ReportViewer1.ServerReport.Render("PDF", string.Empty, out mimeType,
+                            out encoding, out extension, out streams, out warnings);
+
+                        // save the file
+                        using (FileStream fs = new FileStream(outputPath, FileMode.Create))
+                        {
+                            fs.Write(pdfBytes, 0, pdfBytes.Length);
+                            fs.Close();
+                        }
+
+                    }
+                    
+                    
                 }
                 if (rptname == "Employee Hours Worked Weekly")
                 {
