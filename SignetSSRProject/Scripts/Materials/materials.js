@@ -74,6 +74,7 @@ $(function () {
             { title: "ID", name: "MaterialsExpenseID", width: 25, align: "center"},
             { name: "Expense", type: "text", width: 35, itemTemplate: function (value) { return "$" + value.toFixed(2); }, align: "center" },
             { title: "Job #", name: "JobID", type: "select", items: listJobNumber, valueField: "JobID", textField: "JobNumber", width: 50, align: "center" },
+            { title: "Date", name: "ExpenseDate", type: "text", width: 50, align: "center" },
             { title: "Item #", name: "ItemNumber", type: "number", width: 30, align: "center" },
             { title: "Description", name: "ExpenseDescription", type: "text", width: 75, align: "center" },
             { title: "PO Number", name: "PONumber", type: "text", width: 35, align: "center" },

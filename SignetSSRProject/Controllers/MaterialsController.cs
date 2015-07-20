@@ -8,6 +8,7 @@ using System.Web;
 using System.Web.Mvc;
 using SignetSSRProject.Models;
 using System.Web.Script.Serialization;
+using System.Data.Entity.SqlServer;
 
 namespace SignetSSRProject.Controllers
 {
@@ -53,6 +54,7 @@ namespace SignetSSRProject.Controllers
                                      mat.MaterialsExpenseID,
                                      mat.Expense,
                                      JobID = mat.Job.JobID,
+                                     ExpenseDate = SqlFunctions.DateName("mm", mat.ExpenseDate) + " " + SqlFunctions.DateName("day", mat.ExpenseDate) + ", " + SqlFunctions.DateName("year", mat.ExpenseDate),
                                      mat.ItemNumber,
                                      mat.ExpenseDescription,
                                      mat.PONumber,
@@ -96,8 +98,26 @@ namespace SignetSSRProject.Controllers
                 return Content("", "application/json");
             }
 
+            var materialsData = (from mat in materialsExpenses
+                                 where mat.MaterialsExpenseID == materials.MaterialsExpenseID                                    
+                                 select new
+                                 {
+                                     mat.MaterialsExpenseID,
+                                     mat.Expense,
+                                     JobID = mat.Job.JobID,
+                                     ExpenseDate = SqlFunctions.DateName("mm", mat.ExpenseDate) + " " + SqlFunctions.DateName("day", mat.ExpenseDate) + ", " + SqlFunctions.DateName("year", mat.ExpenseDate),
+                                     mat.ItemNumber,
+                                     mat.ExpenseDescription,
+                                     mat.PONumber,
+                                     mat.InvoiceNumber,
+                                     mat.TaxIncluded,
+                                     mat.InvoiceReceived,
+                                     mat.TaxPercentage,
+                                     mat.MarkupPercentage
+                                 }).SingleOrDefault();
+
             JavaScriptSerializer jsonSerializer = new JavaScriptSerializer();
-            string output = jsonSerializer.Serialize(materials);
+            string output = jsonSerializer.Serialize(materialsData);
             return Content(output, "application/json");
 
         }
@@ -127,8 +147,27 @@ namespace SignetSSRProject.Controllers
                 }
             }
 
+            var materialsExpenses = db.MaterialsExpenses.Include(m => m.Job);
+            var materialsData = (from mat in materialsExpenses
+                                 where mat.MaterialsExpenseID == materials.MaterialsExpenseID
+                                 select new
+                                 {
+                                     mat.MaterialsExpenseID,
+                                     mat.Expense,
+                                     JobID = mat.Job.JobID,
+                                     ExpenseDate = SqlFunctions.DateName("mm", mat.ExpenseDate) + " " + SqlFunctions.DateName("day", mat.ExpenseDate) + ", " + SqlFunctions.DateName("year", mat.ExpenseDate),
+                                     mat.ItemNumber,
+                                     mat.ExpenseDescription,
+                                     mat.PONumber,
+                                     mat.InvoiceNumber,
+                                     mat.TaxIncluded,
+                                     mat.InvoiceReceived,
+                                     mat.TaxPercentage,
+                                     mat.MarkupPercentage
+                                 }).SingleOrDefault();
+
             JavaScriptSerializer jsonSerializer = new JavaScriptSerializer();
-            string output = jsonSerializer.Serialize(materials);
+            string output = jsonSerializer.Serialize(materialsData);
             return Content(output, "application/json");
 
         }
