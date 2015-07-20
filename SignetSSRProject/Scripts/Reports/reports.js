@@ -8,6 +8,8 @@
 
     $('[name=RateID]').dropdown();
     $('[name=EmployeeID]').dropdown();
+    $('[name=Rpt8EmployeeID]').dropdown();
     $('[name=JobID]').dropdown();
+    $('[name=Rpt7JobID]').dropdown();
     $('[name=Status]').dropdown();
 });

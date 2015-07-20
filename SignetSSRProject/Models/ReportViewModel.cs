@@ -17,7 +17,9 @@ namespace SignetSSRProject.Models
         //Declare report parameter properties
         public List<int> RateID { get; set; }
         public List<int> EmployeeID { get; set; }
+        public List<int> Rpt8EmployeeID { get; set; }
         public List<int> JobID { get; set; }
+        public List<int> Rpt7JobID { get; set; }
 
         public List<string> Status { get; set; }
         public int CostOption { get; set; }

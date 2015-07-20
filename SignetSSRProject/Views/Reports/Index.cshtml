@@ -23,7 +23,6 @@
 
 <div class="ui grid">
 
-    <div id="error_placeholder"></div>
 
     <div class="container">
         <div class="panel panel-default">
@@ -43,7 +42,10 @@
 
                         <div class="well">
                             <div class="container">
-                                @using (Html.BeginForm("Rpt1ProjectHoursByJobClass", "Reports", FormMethod.Post))
+                                <div class="row">
+                                    <div id="error_placeholderRpt1" class="col-md-11"></div>
+                                </div>
+                                @using (Html.BeginForm("Rpt1ProjectHoursByJobClass", "Reports", FormMethod.Post, new { onsubmit = "validateRpt1ProjHrsByClass(event)" }))
                                 {
                                     @Html.AntiForgeryToken()
                                     <div class="row">
@@ -99,7 +101,10 @@
                         <hr></hr>
                         <div class="well">
                             <div class="container">
-                                @using (Html.BeginForm("Rpt2ProjectHoursWeekly", "Reports", FormMethod.Post))
+                                <div class="row">
+                                    <div id="error_placeholderRpt2" class="col-md-11"></div>
+                                </div>
+                                @using (Html.BeginForm("Rpt2ProjectHoursWeekly", "Reports", FormMethod.Post, new { onsubmit = "validateRpt2ProjHrsWeek(event)" }))
                                 {
                                     @Html.AntiForgeryToken()
                                     <div class="row" style="padding-top: 10px">
@@ -140,7 +145,10 @@
                         <hr></hr>
                         <div class="well">
                             <div class="container">
-                                @using (Html.BeginForm("Rpt3ProjectHoursMonth", "Reports", FormMethod.Post))
+                                <div class="row">
+                                    <div id="error_placeholderRpt3" class="col-md-11"></div>
+                                </div>
+                                @using (Html.BeginForm("Rpt3ProjectHoursMonth", "Reports", FormMethod.Post, new { onsubmit = "validateRpt3ProjHrsMnth(event)" }))
                                 {
                                     @Html.AntiForgeryToken()
                                     <div class="row" style="padding-top: 10px">
@@ -183,7 +191,10 @@
                         <hr></hr>
                         <div class="well">
                             <div class="container">
-                                @using (Html.BeginForm("Rpt4HoursWorkedByEmployee", "Reports", FormMethod.Post))
+                                <div class="row">
+                                    <div id="error_placeholderRpt4" class="col-md-11"></div>
+                                </div>
+                                @using (Html.BeginForm("Rpt4HoursWorkedByEmployee", "Reports", FormMethod.Post, new { onsubmit = "validateRpt4HoursEmp(event)" }))
                                 {
                                     @Html.AntiForgeryToken()
                                     <div class="row">
@@ -237,7 +248,10 @@
                         <hr></hr>
                         <div class="well">
                             <div class="container">
-                                @using (Html.BeginForm("Rpt5EmployeeHoursWeekly", "Reports", FormMethod.Post))
+                                <div class="row">
+                                    <div id="error_placeholderRpt5" class="col-md-11"></div>
+                                </div>
+                                @using (Html.BeginForm("Rpt5EmployeeHoursWeekly", "Reports", FormMethod.Post, new { onsubmit = "validateRpt5EmpHrsWeek(event)" }))
                                 {
                                     @Html.AntiForgeryToken()
                                     <div class="row">
@@ -293,7 +307,10 @@
                         <hr></hr>
                         <div class="well">
                             <div class="container">
-                                @using (Html.BeginForm("Rpt6ProfitSummary", "Reports", FormMethod.Post))
+                                <div class="row">
+                                    <div id="error_placeholderRpt6" class="col-md-11"></div>
+                                </div>
+                                @using (Html.BeginForm("Rpt6ProfitSummary", "Reports", FormMethod.Post, new { onsubmit = "validateRpt6ProfSum(event)" }))
                                 {
                                     @Html.AntiForgeryToken()
                                     <div class="row">
@@ -367,7 +384,10 @@
                         <hr></hr>
                         <div class="well">
                             <div class="container">
-                                @using (Html.BeginForm("Rpt7MaterialsExpense", "Reports", FormMethod.Post))
+                                <div class="row">
+                                    <div id="error_placeholderRpt7" class="col-md-11"></div>
+                                </div>
+                                @using (Html.BeginForm("Rpt7MaterialsExpense", "Reports", FormMethod.Post, new { onsubmit = "validateRpt7MatExp(event)" }))
                                 {
                                     @Html.AntiForgeryToken()
                                     <div class="row">
@@ -378,7 +398,7 @@
                                     </div>
                                     <div class="row">
                                         <div class="col-md-9">
-                                            @Html.DropDownList("JobID", new MultiSelectList(ViewBag.JobsSet, "JobID", "VesselName"), new { @class = "ui fluid search selection dropdown", @multiple = ""})
+                                            @Html.DropDownList("Rpt7JobID", new MultiSelectList(ViewBag.JobsSet, "JobID", "VesselName"), new { @class = "ui fluid search selection dropdown", @multiple = ""})
                                             
                                         </div>
                                     </div>
@@ -423,6 +443,10 @@
                         <hr></hr>
                         <div class="well">
                             <div class="container">
+
+                                <div class="row">
+                                    <div id="error_placeholderRpt8" class="col-md-11"></div>
+                                </div>
                                 @using (Html.BeginForm("Rpt8AbsenceAndTardiness", "Reports", FormMethod.Post, new { onsubmit = "validateRpt8AbsAndTard(event)" }))
                                 {
                                     @Html.AntiForgeryToken()
@@ -434,7 +458,7 @@
                                     </div>
                                     <div class="row">
                                         <div class="col-md-9">
-                                            @Html.DropDownList("EmployeeID", new MultiSelectList(ViewBag.EmployeesSet, "EmployeeID", "FirstName"), new { @class = "ui fluid search selection dropdown", @multiple = ""})
+                                            @Html.DropDownList("Rpt8EmployeeID", new MultiSelectList(ViewBag.EmployeesSet, "EmployeeID", "FirstName"), new { @class = "ui fluid search selection dropdown", @multiple = ""})
                                             
                                         </div>
                                     </div>
@@ -471,4 +495,5 @@
             </ul>
         </div>
     </div>
+
 </div>
