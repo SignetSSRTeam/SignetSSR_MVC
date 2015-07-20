@@ -73,7 +73,7 @@ namespace SignetSSRProject.Controllers
             string beginDate = viewModel.rpt1BeginDate;
             string endDate = viewModel.rpt1EndDate;
             string viewOrDownload = viewModel.VieworDownload;
-            return Redirect("../Reports/Master RVC.aspx?JobType=" + strRateIDS + "&BeginDate=" + beginDate + "&EndDate=" + endDate + "&Reportname=" + rptname);
+            return Redirect("../Reports/Master RVC.aspx?JobType=" + strRateIDS + "&BeginDate=" + beginDate + "&EndDate=" + endDate + "&Reportname=" + rptname + "&Viewdownload=" + viewOrDownload);
         }
 
         [HttpPost]
@@ -83,7 +83,7 @@ namespace SignetSSRProject.Controllers
             string rptname = "Project hours worked weely";
             string date = viewModel.rpt2Date;
             string viewOrDownload = viewModel.VieworDownload;
-            return Redirect("../Reports/Master RVC.aspx?Date=" + date + "&Reportname=" + rptname);
+            return Redirect("../Reports/Master RVC.aspx?Date=" + date + "&Reportname=" + rptname + "&Viewdownload=" + viewOrDownload);
         }
 
         [HttpPost]
@@ -94,7 +94,7 @@ namespace SignetSSRProject.Controllers
             string month = viewModel.month;
             int year = viewModel.year;
             string viewOrDownload = viewModel.VieworDownload;
-            return Redirect("../Reports/Master RVC.aspx?YEAR=" + year + "&Month=" + month + "&Reportname=" + rptname);
+            return Redirect("../Reports/Master RVC.aspx?YEAR=" + year + "&Month=" + month + "&Reportname=" + rptname + "&Viewdownload=" + viewOrDownload);
         }
 
         [HttpPost]
@@ -107,7 +107,7 @@ namespace SignetSSRProject.Controllers
             string beginDate = viewModel.rpt4BeginDate;
             string endDate = viewModel.rpt4EndDate;
             string viewOrDownload = viewModel.VieworDownload;
-            return Redirect("../Reports/Master RVC.aspx?EmployeeID=" + strEmployeeIDS + "&BeginDate=" + beginDate + "&EndDate=" + endDate + "&Reportname=" + rptname);
+            return Redirect("../Reports/Master RVC.aspx?EmployeeID=" + strEmployeeIDS + "&BeginDate=" + beginDate + "&EndDate=" + endDate + "&Reportname=" + rptname +"&Viewdownload="+viewOrDownload);
         }
 
         [HttpPost]
@@ -118,7 +118,7 @@ namespace SignetSSRProject.Controllers
             bool contractLaborer = viewModel.ContractLaborer;
             string date = viewModel.rpt5Date;
             string viewOrDownload = viewModel.VieworDownload;
-            return Redirect("../Reports/Master RVC.aspx?ContractLaborer=" + contractLaborer + "&Date=" + date + "&Reportname=" + rptname);
+            return Redirect("../Reports/Master RVC.aspx?ContractLaborer=" + contractLaborer + "&Date=" + date + "&Reportname=" + rptname + "&Viewdownload=" + viewOrDownload);
         }
 
         [HttpPost]
@@ -134,7 +134,7 @@ namespace SignetSSRProject.Controllers
             string beginDate = viewModel.rpt6BeginDate;
             string endDate = viewModel.rpt6EndDate;
             string viewOrDownload = viewModel.VieworDownload;
-            return Redirect("../Reports/Master RVC.aspx?JobID=" + strJobIDS + "&CostOption=" + costOption + "&Status=" + strStatus + "&BeginDate=" + beginDate + "&EndDate=" + endDate + "&Reportname=" + rptname);
+            return Redirect("../Reports/Master RVC.aspx?JobID=" + strJobIDS + "&CostOption=" + costOption + "&Status=" + strStatus + "&BeginDate=" + beginDate + "&EndDate=" + endDate + "&Reportname=" + rptname + "&Viewdownload=" + viewOrDownload);
         }
 
         [HttpPost]
@@ -142,12 +142,12 @@ namespace SignetSSRProject.Controllers
         public ActionResult Rpt7MaterialsExpense(ReportViewModel viewModel)
         {
             string rptname = "Materials Expense Details";
-            List<int> jobID = viewModel.JobID;
+            List<int> jobID = viewModel.Rpt7JobID;
             var strJobIDS = String.Join(",", jobID.ToArray());
             string beginDate = viewModel.rpt7BeginDate;
             string endDate = viewModel.rpt7EndDate;
             string viewOrDownload = viewModel.VieworDownload;
-            return Redirect("../Reports/Master RVC.aspx?JobID=" + strJobIDS + "&BeginDate=" + beginDate + "&EndDate=" + endDate + "&Reportname=" + rptname);
+            return Redirect("../Reports/Master RVC.aspx?JobID=" + strJobIDS + "&BeginDate=" + beginDate + "&EndDate=" + endDate + "&Reportname=" + rptname + "&Viewdownload=" + viewOrDownload);
         }
 
         [HttpPost]
@@ -155,12 +155,12 @@ namespace SignetSSRProject.Controllers
         public ActionResult Rpt8AbsenceAndTardiness(ReportViewModel viewModel)
         {
             string rptname = "Specific Employee Absences and Tardiness Report";
-            List<int> employeeID = viewModel.EmployeeID;
+            List<int> employeeID = viewModel.Rpt8EmployeeID;
             var strEmployeeIDS = String.Join(",", employeeID.ToArray());
             string beginDate = viewModel.rpt8BeginDate;
             string endDate = viewModel.rpt8EndDate;
             string viewOrDownload = viewModel.VieworDownload;
-            return Redirect("../Reports/Master RVC.aspx?EmployeeID=" + strEmployeeIDS + "&BeginDate=" + beginDate + "&EndDate=" + endDate + "&Reportname=" + rptname);
+            return Redirect("../Reports/Master RVC.aspx?EmployeeID=" + strEmployeeIDS + "&BeginDate=" + beginDate + "&EndDate=" + endDate + "&Reportname=" + rptname + "&Viewdownload=" + viewOrDownload);
         }
 
         private List<SelectListItem> returnCostOption()
