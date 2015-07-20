@@ -22,9 +22,10 @@ namespace SignetSSRProject.Reports
                 ReportViewer1.ServerReport.ReportServerUrl = new Uri("http://192.245.222.208/ReportServer");
 
                 string rptname = HttpContext.Current.Request.QueryString["Reportname"];
+                string Viewdownload = HttpContext.Current.Request.QueryString["Viewdownload"];
                 if (rptname == "Total Project Hours Worked By Job Classification")
                 {
-                    
+                    bool isReportDownload = Convert.ToBoolean(Viewdownload);
                     ReportViewer1.Visible = true;
                     ReportViewer1.ServerReport.ReportPath = string.Format(@"/SignetSSRReports/{0}", rptname);
                     string JobType = HttpContext.Current.Request.QueryString["JobType"];
@@ -42,9 +43,35 @@ namespace SignetSSRProject.Reports
                     this.ReportViewer1.ServerReport.SetParameters(new ReportParameter[] { paramJobType });
                     this.ReportViewer1.ServerReport.SetParameters(new ReportParameter[] { paramBeginDate });
                     this.ReportViewer1.ServerReport.SetParameters(new ReportParameter[] { paramEndDate });
+
+                    if (isReportDownload)
+                    {
+                        ReportViewer1.Visible = false;
+                        string outputPath = String.Format("C:\\SignetReports\\{0} {1}.pdf", rptname, DateTime.Now.ToString("MM.dd.yyyy h.mm tt"));
+
+                        lblMessage.Text = String.Format("Report has been saved to {0}", outputPath);
+                        lblMessage.Visible = true;
+
+                        string mimeType;
+                        string encoding;
+                        string extension;
+                        string[] streams;
+                        Warning[] warnings;
+                        byte[] pdfBytes = ReportViewer1.ServerReport.Render("PDF", string.Empty, out mimeType,
+                            out encoding, out extension, out streams, out warnings);
+
+                        // save the file
+                        using (FileStream fs = new FileStream(outputPath, FileMode.Create))
+                        {
+                            fs.Write(pdfBytes, 0, pdfBytes.Length);
+                            fs.Close();
+                        }
+
+                    }
                 }
                 if (rptname == "Project hours worked weely")
                 {
+                    bool isReportDownload = Convert.ToBoolean(Viewdownload);
                     ReportViewer1.Visible = true;
                     ReportViewer1.ServerReport.ReportPath = string.Format(@"/SignetSSRReports/{0}", rptname);
                     ReportViewer1.ServerReport.Refresh();
@@ -53,10 +80,35 @@ namespace SignetSSRProject.Reports
                     ReportParameter paramDate = new ReportParameter("Date", Date);
                     //this.ReportViewer1.LocalReport.SetParameters(parameters);
                     this.ReportViewer1.ServerReport.SetParameters(new ReportParameter[] { paramDate });
+
+                    if (isReportDownload)
+                    {
+                        ReportViewer1.Visible = false;
+                        string outputPath = String.Format("C:\\SignetReports\\{0} {1}.pdf", rptname, DateTime.Now.ToString("MM.dd.yyyy h.mm tt"));
+
+                        lblMessage.Text = String.Format("Report has been saved to {0}", outputPath);
+                        lblMessage.Visible = true;
+
+                        string mimeType;
+                        string encoding;
+                        string extension;
+                        string[] streams;
+                        Warning[] warnings;
+                        byte[] pdfBytes = ReportViewer1.ServerReport.Render("PDF", string.Empty, out mimeType,
+                            out encoding, out extension, out streams, out warnings);
+
+                        // save the file
+                        using (FileStream fs = new FileStream(outputPath, FileMode.Create))
+                        {
+                            fs.Write(pdfBytes, 0, pdfBytes.Length);
+                            fs.Close();
+                        }
+
+                    }
                 }
                 if (rptname == "Hours Worked by Employee")
                 {
-                    bool isReportDownload = true;                    
+                    bool isReportDownload =Convert.ToBoolean(Viewdownload);                    
                     
                     ReportViewer1.Visible = true;
                     ReportViewer1.ServerReport.ReportPath = string.Format(@"/SignetSSRReports/{0}", rptname);
@@ -78,14 +130,14 @@ namespace SignetSSRProject.Reports
                     this.ReportViewer1.ServerReport.SetParameters(new ReportParameter[] { paramSTID });
                     this.ReportViewer1.ServerReport.SetParameters(new ReportParameter[] { paramEDT });
 
-                    if (isReportDownload) 
+                    if (isReportDownload)
                     {
                         ReportViewer1.Visible = false;
                         string outputPath = String.Format("C:\\SignetReports\\{0} {1}.pdf", rptname, DateTime.Now.ToString("MM.dd.yyyy h.mm tt"));
 
-                        lblMessage.Text = String.Format("Report has been saved to {0}", outputPath);                            
-                        lblMessage.Visible = true;  
-                        
+                        lblMessage.Text = String.Format("Report has been saved to {0}", outputPath);
+                        lblMessage.Visible = true;
+
                         string mimeType;
                         string encoding;
                         string extension;
@@ -102,11 +154,12 @@ namespace SignetSSRProject.Reports
                         }
 
                     }
-                    
+
                     
                 }
                 if (rptname == "Employee Hours Worked Weekly")
                 {
+                    bool isReportDownload = Convert.ToBoolean(Viewdownload);
                     ReportViewer1.Visible = true;
                     ReportViewer1.ServerReport.ReportPath = string.Format(@"/SignetSSRReports/{0}", rptname);
                     ReportViewer1.LocalReport.Refresh();
@@ -120,10 +173,36 @@ namespace SignetSSRProject.Reports
 
                     this.ReportViewer1.ServerReport.SetParameters(new ReportParameter[] { paramContractLaborer });
                     this.ReportViewer1.ServerReport.SetParameters(new ReportParameter[] { paramDate });
+
+                    if (isReportDownload)
+                    {
+                        ReportViewer1.Visible = false;
+                        string outputPath = String.Format("C:\\SignetReports\\{0} {1}.pdf", rptname, DateTime.Now.ToString("MM.dd.yyyy h.mm tt"));
+
+                        lblMessage.Text = String.Format("Report has been saved to {0}", outputPath);
+                        lblMessage.Visible = true;
+
+                        string mimeType;
+                        string encoding;
+                        string extension;
+                        string[] streams;
+                        Warning[] warnings;
+                        byte[] pdfBytes = ReportViewer1.ServerReport.Render("PDF", string.Empty, out mimeType,
+                            out encoding, out extension, out streams, out warnings);
+
+                        // save the file
+                        using (FileStream fs = new FileStream(outputPath, FileMode.Create))
+                        {
+                            fs.Write(pdfBytes, 0, pdfBytes.Length);
+                            fs.Close();
+                        }
+
+                    }
                 }
                 if (rptname == "Materials Expense Details")
                 {
                     //string[] JobID = (string[])Session["Cart"];
+                    bool isReportDownload = Convert.ToBoolean(Viewdownload);
                     ReportViewer1.Visible = true;
                     ReportViewer1.ServerReport.ReportPath = string.Format(@"/SignetSSRReports/{0}", rptname);
                     string JobID = HttpContext.Current.Request.QueryString["JobID"];
@@ -140,9 +219,35 @@ namespace SignetSSRProject.Reports
                     this.ReportViewer1.ServerReport.SetParameters(new ReportParameter[] { paramJobID });
                     this.ReportViewer1.ServerReport.SetParameters(new ReportParameter[] { paramStartDate });
                     this.ReportViewer1.ServerReport.SetParameters(new ReportParameter[] { paramEndDate });
+
+                    if (isReportDownload)
+                    {
+                        ReportViewer1.Visible = false;
+                        string outputPath = String.Format("C:\\SignetReports\\{0} {1}.pdf", rptname, DateTime.Now.ToString("MM.dd.yyyy h.mm tt"));
+
+                        lblMessage.Text = String.Format("Report has been saved to {0}", outputPath);
+                        lblMessage.Visible = true;
+
+                        string mimeType;
+                        string encoding;
+                        string extension;
+                        string[] streams;
+                        Warning[] warnings;
+                        byte[] pdfBytes = ReportViewer1.ServerReport.Render("PDF", string.Empty, out mimeType,
+                            out encoding, out extension, out streams, out warnings);
+
+                        // save the file
+                        using (FileStream fs = new FileStream(outputPath, FileMode.Create))
+                        {
+                            fs.Write(pdfBytes, 0, pdfBytes.Length);
+                            fs.Close();
+                        }
+
+                    }
                 }
                 if (rptname == "ProfitSummary")
                 {
+                    bool isReportDownload = Convert.ToBoolean(Viewdownload);
                     ReportViewer1.Visible = true;
                     ReportViewer1.ServerReport.ReportPath = string.Format(@"/SignetSSRReports/{0}", rptname);
                     string JobID = HttpContext.Current.Request.QueryString["JobID"];
@@ -170,9 +275,35 @@ namespace SignetSSRProject.Reports
                     this.ReportViewer1.ServerReport.SetParameters(new ReportParameter[] { paramBeginDate });
                     this.ReportViewer1.ServerReport.SetParameters(new ReportParameter[] { paramEndDate });
 
+                    if (isReportDownload)
+                    {
+                        ReportViewer1.Visible = false;
+                        string outputPath = String.Format("C:\\SignetReports\\{0} {1}.pdf", rptname, DateTime.Now.ToString("MM.dd.yyyy h.mm tt"));
+
+                        lblMessage.Text = String.Format("Report has been saved to {0}", outputPath);
+                        lblMessage.Visible = true;
+
+                        string mimeType;
+                        string encoding;
+                        string extension;
+                        string[] streams;
+                        Warning[] warnings;
+                        byte[] pdfBytes = ReportViewer1.ServerReport.Render("PDF", string.Empty, out mimeType,
+                            out encoding, out extension, out streams, out warnings);
+
+                        // save the file
+                        using (FileStream fs = new FileStream(outputPath, FileMode.Create))
+                        {
+                            fs.Write(pdfBytes, 0, pdfBytes.Length);
+                            fs.Close();
+                        }
+
+                    }
+
                 }
                 if (rptname == "Specific Employee Absences and Tardiness Report")
                 {
+                    bool isReportDownload = Convert.ToBoolean(Viewdownload);
                     ReportViewer1.Visible = true;
                     ReportViewer1.ServerReport.ReportPath = string.Format(@"/SignetSSRReports/{0}", rptname);
                     string EmployeeID = HttpContext.Current.Request.QueryString["EmployeeID"];
@@ -189,11 +320,36 @@ namespace SignetSSRProject.Reports
                     this.ReportViewer1.ServerReport.SetParameters(new ReportParameter[] { paramEmployeeID });
                     this.ReportViewer1.ServerReport.SetParameters(new ReportParameter[] { paramBeginDate });
                     this.ReportViewer1.ServerReport.SetParameters(new ReportParameter[] { paramEndDate });
+
+                    if (isReportDownload)
+                    {
+                        ReportViewer1.Visible = false;
+                        string outputPath = String.Format("C:\\SignetReports\\{0} {1}.pdf", rptname, DateTime.Now.ToString("MM.dd.yyyy h.mm tt"));
+
+                        lblMessage.Text = String.Format("Report has been saved to {0}", outputPath);
+                        lblMessage.Visible = true;
+
+                        string mimeType;
+                        string encoding;
+                        string extension;
+                        string[] streams;
+                        Warning[] warnings;
+                        byte[] pdfBytes = ReportViewer1.ServerReport.Render("PDF", string.Empty, out mimeType,
+                            out encoding, out extension, out streams, out warnings);
+
+                        // save the file
+                        using (FileStream fs = new FileStream(outputPath, FileMode.Create))
+                        {
+                            fs.Write(pdfBytes, 0, pdfBytes.Length);
+                            fs.Close();
+                        }
+
+                    }
                 }
                 if (rptname == "Total Project Hours Worked on a given Month")
                 {
+                    bool isReportDownload = Convert.ToBoolean(Viewdownload);
                     ReportViewer1.Visible = true;
-
                     ReportViewer1.ServerReport.ReportPath = string.Format(@"/SignetSSRReports/{0}", rptname);
                     string month = HttpContext.Current.Request.QueryString["month"];
                     string Year = HttpContext.Current.Request.QueryString["Year"];
@@ -203,7 +359,32 @@ namespace SignetSSRProject.Reports
                     ReportParameter paramYear = new ReportParameter("YEAR", Year);
                     //this.ReportViewer1.LocalReport.SetParameters(parameters);
                     this.ReportViewer1.ServerReport.SetParameters(new ReportParameter[] { parammonth });
-                    this.ReportViewer1.ServerReport.SetParameters(new ReportParameter[] { paramYear });   
+                    this.ReportViewer1.ServerReport.SetParameters(new ReportParameter[] { paramYear });
+
+                    if (isReportDownload)
+                    {
+                        ReportViewer1.Visible = false;
+                        string outputPath = String.Format("C:\\SignetReports\\{0} {1}.pdf", rptname, DateTime.Now.ToString("MM.dd.yyyy h.mm tt"));
+
+                        lblMessage.Text = String.Format("Report has been saved to {0}", outputPath);
+                        lblMessage.Visible = true;
+
+                        string mimeType;
+                        string encoding;
+                        string extension;
+                        string[] streams;
+                        Warning[] warnings;
+                        byte[] pdfBytes = ReportViewer1.ServerReport.Render("PDF", string.Empty, out mimeType,
+                            out encoding, out extension, out streams, out warnings);
+
+                        // save the file
+                        using (FileStream fs = new FileStream(outputPath, FileMode.Create))
+                        {
+                            fs.Write(pdfBytes, 0, pdfBytes.Length);
+                            fs.Close();
+                        }
+
+                    }
                 }
             }
         }
