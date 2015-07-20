@@ -12,6 +12,7 @@
 <script src="/Scripts/jquery-ui-1.11.4.js"></script>
 <script src="/Scripts/semantic.js"></script>
 <script src="/Scripts/Reports/reports.js"></script>
+<script src="/Scripts/Reports/reportValidation.js"></script>
 <script type="text/javascript">
     $(function () {
         // This will make every element with the class "date-picker" into a DatePicker element
@@ -22,6 +23,7 @@
 
 <div class="ui grid">
 
+    <div id="error_placeholder"></div>
 
     <div class="container">
         <div class="panel panel-default">
@@ -310,8 +312,12 @@
                                         @Html.ValidationSummary(true)
                                         <div class="col-md-2">
                                             <label> Job Status </label>
-                                            @Html.DropDownList("Status", String.Empty)
-                                            @Html.ValidationMessageFor(model => model.jobModel.Status)
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-3">
+                                            @Html.DropDownList("Status", new MultiSelectList(ViewBag.Status, "Status"), new { @class = "ui fluid search selection dropdown", @multiple = ""})
+                                            
                                         </div>
                                     </div>
                                     <div class="row" style="padding-top: 10px">
@@ -417,7 +423,7 @@
                         <hr></hr>
                         <div class="well">
                             <div class="container">
-                                @using (Html.BeginForm("Rpt8AbsenceAndTardiness", "Reports", FormMethod.Post))
+                                @using (Html.BeginForm("Rpt8AbsenceAndTardiness", "Reports", FormMethod.Post, new { onsubmit = "validateRpt8AbsAndTard(event)" }))
                                 {
                                     @Html.AntiForgeryToken()
                                     <div class="row">

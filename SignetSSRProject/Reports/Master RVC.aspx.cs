@@ -33,7 +33,9 @@ namespace SignetSSRProject.Reports
                     string EndDate = HttpContext.Current.Request.QueryString["EndDate"];
                     ReportViewer1.ServerReport.Refresh();
                     ReportParameter[] parameters = new ReportParameter[2];
-                    ReportParameter paramJobType = new ReportParameter("JobType", JobType);
+                    string[] lsRateID = JobType.Split(',');
+                    ReportParameter paramJobType = new ReportParameter("JobType");
+                    paramJobType.Values.AddRange(lsRateID);       
                     ReportParameter paramBeginDate = new ReportParameter("BeginDate", BeginDate);
                     ReportParameter paramEndDate = new ReportParameter("EndDate", EndDate);
                     //this.ReportViewer1.LocalReport.SetParameters(parameters);
@@ -125,11 +127,13 @@ namespace SignetSSRProject.Reports
                     ReportViewer1.Visible = true;
                     ReportViewer1.ServerReport.ReportPath = string.Format(@"/SignetSSRReports/{0}", rptname);
                     string JobID = HttpContext.Current.Request.QueryString["JobID"];
-                    string StartDate = HttpContext.Current.Request.QueryString["StartDate"];
+                    string StartDate = HttpContext.Current.Request.QueryString["BeginDate"];
                     string EndDate = HttpContext.Current.Request.QueryString["EndDate"];
                     ReportViewer1.ServerReport.Refresh();
                     ReportParameter[] parameters = new ReportParameter[3];
-                    ReportParameter paramJobID = new ReportParameter("JobID", JobID);
+                    string[] lsJobID = JobID.Split(',');
+                    ReportParameter paramJobID = new ReportParameter("JobID");
+                    paramJobID.Values.AddRange(lsJobID);
                     ReportParameter paramStartDate = new ReportParameter("StartDate", StartDate);
                     ReportParameter paramEndDate = new ReportParameter("EndDate", EndDate);
                     //this.ReportViewer1.LocalReport.SetParameters(parameters);
@@ -153,7 +157,9 @@ namespace SignetSSRProject.Reports
                     ReportParameter paramJobID = new ReportParameter("JobID");
                     paramJobID.Values.AddRange(lsJobID);
                     ReportParameter paramCostOption = new ReportParameter("CostOption", CostOption);
-                    ReportParameter paramJobStatus = new ReportParameter("Status", Status);
+                    string[] lsStatus = Status.Split(',');
+                    ReportParameter paramJobStatus = new ReportParameter("Status");
+                    paramJobStatus.Values.AddRange(lsStatus);
                     ReportParameter paramBeginDate = new ReportParameter("BeginDate", BeginDate);
                     ReportParameter paramEndDate = new ReportParameter("EndDate", EndDate);
                     
@@ -169,16 +175,18 @@ namespace SignetSSRProject.Reports
                 {
                     ReportViewer1.Visible = true;
                     ReportViewer1.ServerReport.ReportPath = string.Format(@"/SignetSSRReports/{0}", rptname);
-                    string ReportParameter1 = HttpContext.Current.Request.QueryString["ReportParameter1"];
+                    string EmployeeID = HttpContext.Current.Request.QueryString["EmployeeID"];
                     string BeginDate = HttpContext.Current.Request.QueryString["BeginDate"];
                     string EndDate = HttpContext.Current.Request.QueryString["EndDate"];
                     ReportViewer1.ServerReport.Refresh();
                     ReportParameter[] parameters = new ReportParameter[2];
-                    ReportParameter paramReportParameter1 = new ReportParameter("ReportParameter1", ReportParameter1);
+                    string[] lsEmpID = EmployeeID.Split(',');
+                    ReportParameter paramEmployeeID = new ReportParameter("employeeID");
+                    paramEmployeeID.Values.AddRange(lsEmpID); 
                     ReportParameter paramBeginDate = new ReportParameter("BeginDate", BeginDate);
                     ReportParameter paramEndDate = new ReportParameter("EndDate", EndDate);
                     //this.ReportViewer1.LocalReport.SetParameters(parameters);
-                    this.ReportViewer1.ServerReport.SetParameters(new ReportParameter[] { paramReportParameter1 });
+                    this.ReportViewer1.ServerReport.SetParameters(new ReportParameter[] { paramEmployeeID });
                     this.ReportViewer1.ServerReport.SetParameters(new ReportParameter[] { paramBeginDate });
                     this.ReportViewer1.ServerReport.SetParameters(new ReportParameter[] { paramEndDate });
                 }

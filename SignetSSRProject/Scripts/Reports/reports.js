@@ -9,4 +9,5 @@
     $('[name=RateID]').dropdown();
     $('[name=EmployeeID]').dropdown();
     $('[name=JobID]').dropdown();
+    $('[name=Status]').dropdown();
 });

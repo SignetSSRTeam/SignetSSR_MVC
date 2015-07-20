@@ -19,7 +19,7 @@ namespace SignetSSRProject.Models
         public List<int> EmployeeID { get; set; }
         public List<int> JobID { get; set; }
 
-        public string Status { get; set; }
+        public List<string> Status { get; set; }
         public int CostOption { get; set; }
 
         public string VieworDownload { get; set; }

@@ -53,7 +53,8 @@ namespace SignetSSRProject.Controllers
             ViewBag.RatesSet = db.Rates;
             ViewBag.EmployeesSet = db.Employees;
             ViewBag.JobsSet = db.Jobs;
-            ViewBag.Status = new SelectList(jobStatusList);
+            ViewBag.Status = jobStatusList;
+            //ViewBag.Status = new SelectList(jobStatusList);
             ViewBag.CostOption = new SelectList(returnCostOption(), "Value", "Text");
             ViewBag.Month = new SelectList(month);
             ViewBag.Year = new SelectList(year);
@@ -66,13 +67,13 @@ namespace SignetSSRProject.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Rpt1ProjectHoursByJobClass(ReportViewModel viewModel)
         {
-            //int jobType = viewModel.RateID;
+            List<int> rateID = viewModel.RateID;
+            var strRateIDS = String.Join(",", rateID.ToArray());
             string rptname = "Total Project Hours Worked By Job Classification";
-            string jobType = "Billable Hour";
             string beginDate = viewModel.rpt1BeginDate;
             string endDate = viewModel.rpt1EndDate;
             string viewOrDownload = viewModel.VieworDownload;
-            return Redirect("../Reports/Master RVC.aspx?JobType=" + jobType + "&BeginDate=" + beginDate + "&EndDate=" + endDate + "&Reportname=" + rptname);
+            return Redirect("../Reports/Master RVC.aspx?JobType=" + strRateIDS + "&BeginDate=" + beginDate + "&EndDate=" + endDate + "&Reportname=" + rptname);
         }
 
         [HttpPost]
@@ -90,7 +91,7 @@ namespace SignetSSRProject.Controllers
         public ActionResult Rpt3ProjectHoursMonth(ReportViewModel viewModel)
         {
             string rptname = "Total Project Hours Worked on a given Month";
-            int month = DateTime.ParseExact(viewModel.month, "MMMM", System.Globalization.CultureInfo.InvariantCulture).Month;
+            string month = viewModel.month;
             int year = viewModel.year;
             string viewOrDownload = viewModel.VieworDownload;
             return Redirect("../Reports/Master RVC.aspx?YEAR=" + year + "&Month=" + month + "&Reportname=" + rptname);
@@ -128,11 +129,12 @@ namespace SignetSSRProject.Controllers
             List<int> jobID = viewModel.JobID;
             var strJobIDS = String.Join(",", jobID.ToArray());
             int costOption = viewModel.CostOption;
-            string status = viewModel.Status;
+            List<string> status = viewModel.Status;
+            var strStatus = String.Join(",", status.ToArray());
             string beginDate = viewModel.rpt6BeginDate;
             string endDate = viewModel.rpt6EndDate;
             string viewOrDownload = viewModel.VieworDownload;
-            return Redirect("../Reports/Master RVC.aspx?JobID=" + strJobIDS + "&CostOption=" + costOption + "&Status=" + status + "&BeginDate=" + beginDate + "&EndDate=" + endDate + "&Reportname=" + rptname);
+            return Redirect("../Reports/Master RVC.aspx?JobID=" + strJobIDS + "&CostOption=" + costOption + "&Status=" + strStatus + "&BeginDate=" + beginDate + "&EndDate=" + endDate + "&Reportname=" + rptname);
         }
 
         [HttpPost]
@@ -141,10 +143,11 @@ namespace SignetSSRProject.Controllers
         {
             string rptname = "Materials Expense Details";
             List<int> jobID = viewModel.JobID;
+            var strJobIDS = String.Join(",", jobID.ToArray());
             string beginDate = viewModel.rpt7BeginDate;
             string endDate = viewModel.rpt7EndDate;
             string viewOrDownload = viewModel.VieworDownload;
-            return Redirect("../Reports/Master RVC.aspx?JobID=" + jobID + "&BeginDate=" + beginDate + "&EndDate=" + endDate + "&Reportname=" + rptname);
+            return Redirect("../Reports/Master RVC.aspx?JobID=" + strJobIDS + "&BeginDate=" + beginDate + "&EndDate=" + endDate + "&Reportname=" + rptname);
         }
 
         [HttpPost]
@@ -153,10 +156,11 @@ namespace SignetSSRProject.Controllers
         {
             string rptname = "Specific Employee Absences and Tardiness Report";
             List<int> employeeID = viewModel.EmployeeID;
+            var strEmployeeIDS = String.Join(",", employeeID.ToArray());
             string beginDate = viewModel.rpt8BeginDate;
             string endDate = viewModel.rpt8EndDate;
             string viewOrDownload = viewModel.VieworDownload;
-            return Redirect("../Reports/Master RVC.aspx?EmployeeID=" + employeeID + "&BeginDate=" + beginDate + "&EndDate=" + endDate + "&Reportname=" + rptname);
+            return Redirect("../Reports/Master RVC.aspx?EmployeeID=" + strEmployeeIDS + "&BeginDate=" + beginDate + "&EndDate=" + endDate + "&Reportname=" + rptname);
         }
 
         private List<SelectListItem> returnCostOption()
