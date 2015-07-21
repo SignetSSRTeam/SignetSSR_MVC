@@ -15,7 +15,7 @@
         <asp:ScriptManager ID="ScriptManager1" runat="server">
         </asp:ScriptManager>
         <asp:Label ID="lblMessage" runat="server" Text="Your Report has been downloaded" Visible="False"></asp:Label>
-        <rsweb:ReportViewer ID="ReportViewer1" runat="server" Font-Names="Verdana" Font-Size="8pt" ProcessingMode="Remote" WaitMessageFont-Names="Verdana" WaitMessageFont-Size="14pt" Width="948px">
+        <rsweb:ReportViewer ID="ReportViewer1" runat="server" Font-Names="Verdana" Font-Size="8pt" ProcessingMode="Remote" WaitMessageFont-Names="Verdana" WaitMessageFont-Size="14pt" Width="948px" PromptAreaCollapsed="True" ShowPromptAreaButton="False">
             <ServerReport ReportServerUrl="http://192.245.222.208/reportserver" />
         </rsweb:ReportViewer>
     

@@ -186,7 +186,7 @@ namespace SignetSSRProject.Controllers
             return PartialView("_getWageHistory",w);
         }
 
-        [HttpPost]
+        /*[HttpPost]
         public ActionResult saveWageHistory(WageHistory wageHistory)
         {
             if (ModelState.IsValid)
@@ -208,7 +208,7 @@ namespace SignetSSRProject.Controllers
             return PartialView("_getWageHistory",wageHistory);
             //return RedirectToAction("Edit", new { Id = wageHistory.EmployeeID, @target="parent"});
 
-        }
+        }*/
 
         // GET: /Employee/WageHistoryData
         [HttpGet]

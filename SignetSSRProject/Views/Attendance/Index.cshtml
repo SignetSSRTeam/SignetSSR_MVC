@@ -47,7 +47,7 @@
             @Html.DisplayFor(modelItem => item.Reason)
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.Excused)
+            @Html.CheckBoxFor(modelItem => item.Excused.Value, new { @disabled = "disabled" })
         </td>
         <td>
             @Html.DisplayFor(modelItem => item.Employee.FirstName)

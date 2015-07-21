@@ -53,10 +53,10 @@
             @Html.DisplayFor(modelItem => item.JobTitle)
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.Supervisor)
+            @Html.CheckBoxFor(modelItem => item.Supervisor.Value, new { @disabled = "disabled" })
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.ContractLabor)
+            @Html.CheckBoxFor(modelItem => item.ContractLabor.Value, new { @disabled = "disabled" })
         </td>
         <td>
            @Html.DisplayFor(modelItem => item.WageRateRT)
