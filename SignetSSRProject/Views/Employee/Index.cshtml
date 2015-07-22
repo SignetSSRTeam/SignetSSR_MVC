@@ -8,6 +8,24 @@
 
 <p>
     @Html.ActionLink("Create New", "Create")
+    @using (Html.BeginForm())
+    {
+    <p>
+        @*FirstName: @Html.TextBox("FirstName")&nbsp;
+            LastName: @Html.TextBox("LastName")&nbsp;
+            Company: @Html.TextBox("Company")&nbsp;
+            Title: @Html.TextBox("CustTitle") <br />
+            <input type="submit" value="Filter" />*@
+
+
+        <b>First name:</b>&nbsp;
+        <input type="text" style="display:inline-block" class="form-control" placeholder="First Name" name="FirstName" value="">
+        <b>Last name:</b>&nbsp;
+        <input type="text" style="display:inline-block" class="form-control" placeholder="Last Name" name="LastName" value="">
+
+        <button type="submit" style="display:inline" class="btn btn-primary"><span class="glyphicon glyphicon-search"></span></button>
+    </p><br />
+    }
 </p>
 <table class="table">
     <tr>

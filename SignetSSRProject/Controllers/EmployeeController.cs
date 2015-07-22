@@ -17,7 +17,7 @@ namespace SignetSSRProject.Controllers
         private ISC567_SSRS_DatabaseEntities db = new ISC567_SSRS_DatabaseEntities();
 
         // GET: /Employee/
-        public ActionResult Index()
+        public ActionResult Index(string FirstName, string LastName)
         {
             List<Employee> employees = db.Employees.ToList();
             List<WageHistory> wageHistory = db.WageHistories.ToList();
@@ -43,6 +43,15 @@ namespace SignetSSRProject.Controllers
                              Address = employee.Address,
                              Notes = employee.Notes
                          };
+
+            if (!String.IsNullOrEmpty(FirstName))
+            {
+                result = result.Where(X => X.FirstName.Contains(FirstName));
+            }
+            if (!String.IsNullOrEmpty(LastName))
+            {
+                result = result.Where(X => X.LastName.Contains(LastName));
+            }
 
             return View(result.ToList());
         }
