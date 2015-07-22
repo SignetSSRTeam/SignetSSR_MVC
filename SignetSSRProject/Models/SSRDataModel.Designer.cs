@@ -1,4 +1,4 @@
-﻿// T4 code generation is enabled for model 'C:\Users\Ashwin\Source\Repos\SignetSSRProject2\SignetSSRProject2\SignetSSRProject\Models\SSRDataModel.edmx'. 
+﻿// T4 code generation is enabled for model 'C:\Users\Ashwin\Source\Repos\New_SignetSSR\SignetSSRProject2\SignetSSRProject\Models\SSRDataModel.edmx'. 
 // To enable legacy code generation, change the value of the 'Code Generation Strategy' designer
 // property to 'Legacy ObjectContext'. This property is available in the Properties Window when the model
 // is open in the designer.

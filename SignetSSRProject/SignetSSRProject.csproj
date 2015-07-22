@@ -201,6 +201,8 @@
     <Compile Include="Models\MaterialsExpense.cs">
       <DependentUpon>SSRDataModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\Metadata.cs" />
+    <Compile Include="Models\PartialClasses.cs" />
     <Compile Include="Models\Rate.cs">
       <DependentUpon>SSRDataModel.tt</DependentUpon>
     </Compile>

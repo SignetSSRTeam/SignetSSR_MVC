@@ -42,7 +42,7 @@
         </td>
         <td>
 
-            @Html.DisplayFor(modelItem => item.Supervisor)
+            @Html.CheckBoxFor(modelItem => item.Supervisor.Value, new { @Disabled = "Disabled" })
         </td>
         <td>
             @Html.DisplayFor(modelItem => item.RateRT)

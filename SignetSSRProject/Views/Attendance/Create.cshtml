@@ -4,6 +4,15 @@
     ViewBag.Title = "Create";
 }
 
+<link rel="stylesheet" type="text/css" href="/Content/themes/base/datepicker.css">
+<script src="/Scripts/jquery-ui-1.11.4.js"></script>
+<script type="text/javascript">
+    $(function () {
+        // This will make every element with the class "date-picker" into a DatePicker element
+        $('.date-picker').datepicker();
+    })
+</script>
+
 <h2>Create</h2>
 
 
@@ -27,7 +36,7 @@
         <div class="form-group">
             @Html.LabelFor(model => model.Date, new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.EditorFor(model => model.Date)
+                @Html.TextBoxFor(model => model.Date, new { @class = "date-picker" })
                 @Html.ValidationMessageFor(model => model.Date)
             </div>
         </div>
