@@ -46,27 +46,7 @@ namespace SignetSSRProject.Reports
 
                     if (isReportDownload)
                     {
-                        ReportViewer1.Visible = false;
-                        string outputPath = String.Format("C:\\SignetReports\\{0} {1}.pdf", rptname, DateTime.Now.ToString("MM.dd.yyyy h.mm tt"));
-
-                        lblMessage.Text = String.Format("Report has been saved to {0}", outputPath);
-                        lblMessage.Visible = true;
-
-                        string mimeType;
-                        string encoding;
-                        string extension;
-                        string[] streams;
-                        Warning[] warnings;
-                        byte[] pdfBytes = ReportViewer1.ServerReport.Render("PDF", string.Empty, out mimeType,
-                            out encoding, out extension, out streams, out warnings);
-
-                        // save the file
-                        using (FileStream fs = new FileStream(outputPath, FileMode.Create))
-                        {
-                            fs.Write(pdfBytes, 0, pdfBytes.Length);
-                            fs.Close();
-                        }
-
+                        DownloadReport(rptname);
                     }
                 }
                 if (rptname == "Project hours worked weely")
@@ -83,27 +63,7 @@ namespace SignetSSRProject.Reports
 
                     if (isReportDownload)
                     {
-                        ReportViewer1.Visible = false;
-                        string outputPath = String.Format("C:\\SignetReports\\{0} {1}.pdf", rptname, DateTime.Now.ToString("MM.dd.yyyy h.mm tt"));
-
-                        lblMessage.Text = String.Format("Report has been saved to {0}", outputPath);
-                        lblMessage.Visible = true;
-
-                        string mimeType;
-                        string encoding;
-                        string extension;
-                        string[] streams;
-                        Warning[] warnings;
-                        byte[] pdfBytes = ReportViewer1.ServerReport.Render("PDF", string.Empty, out mimeType,
-                            out encoding, out extension, out streams, out warnings);
-
-                        // save the file
-                        using (FileStream fs = new FileStream(outputPath, FileMode.Create))
-                        {
-                            fs.Write(pdfBytes, 0, pdfBytes.Length);
-                            fs.Close();
-                        }
-
+                        DownloadReport(rptname);
                     }
                 }
                 if (rptname == "Hours Worked by Employee")
@@ -132,27 +92,7 @@ namespace SignetSSRProject.Reports
 
                     if (isReportDownload)
                     {
-                        ReportViewer1.Visible = false;
-                        string outputPath = String.Format("C:\\SignetReports\\{0} {1}.pdf", rptname, DateTime.Now.ToString("MM.dd.yyyy h.mm tt"));
-
-                        lblMessage.Text = String.Format("Report has been saved to {0}", outputPath);
-                        lblMessage.Visible = true;
-
-                        string mimeType;
-                        string encoding;
-                        string extension;
-                        string[] streams;
-                        Warning[] warnings;
-                        byte[] pdfBytes = ReportViewer1.ServerReport.Render("PDF", string.Empty, out mimeType,
-                            out encoding, out extension, out streams, out warnings);
-
-                        // save the file
-                        using (FileStream fs = new FileStream(outputPath, FileMode.Create))
-                        {
-                            fs.Write(pdfBytes, 0, pdfBytes.Length);
-                            fs.Close();
-                        }
-
+                        DownloadReport(rptname);
                     }
 
                     
@@ -176,27 +116,7 @@ namespace SignetSSRProject.Reports
 
                     if (isReportDownload)
                     {
-                        ReportViewer1.Visible = false;
-                        string outputPath = String.Format("C:\\SignetReports\\{0} {1}.pdf", rptname, DateTime.Now.ToString("MM.dd.yyyy h.mm tt"));
-
-                        lblMessage.Text = String.Format("Report has been saved to {0}", outputPath);
-                        lblMessage.Visible = true;
-
-                        string mimeType;
-                        string encoding;
-                        string extension;
-                        string[] streams;
-                        Warning[] warnings;
-                        byte[] pdfBytes = ReportViewer1.ServerReport.Render("PDF", string.Empty, out mimeType,
-                            out encoding, out extension, out streams, out warnings);
-
-                        // save the file
-                        using (FileStream fs = new FileStream(outputPath, FileMode.Create))
-                        {
-                            fs.Write(pdfBytes, 0, pdfBytes.Length);
-                            fs.Close();
-                        }
-
+                        DownloadReport(rptname);
                     }
                 }
                 if (rptname == "Materials Expense Details")
@@ -222,27 +142,7 @@ namespace SignetSSRProject.Reports
 
                     if (isReportDownload)
                     {
-                        ReportViewer1.Visible = false;
-                        string outputPath = String.Format("C:\\SignetReports\\{0} {1}.pdf", rptname, DateTime.Now.ToString("MM.dd.yyyy h.mm tt"));
-
-                        lblMessage.Text = String.Format("Report has been saved to {0}", outputPath);
-                        lblMessage.Visible = true;
-
-                        string mimeType;
-                        string encoding;
-                        string extension;
-                        string[] streams;
-                        Warning[] warnings;
-                        byte[] pdfBytes = ReportViewer1.ServerReport.Render("PDF", string.Empty, out mimeType,
-                            out encoding, out extension, out streams, out warnings);
-
-                        // save the file
-                        using (FileStream fs = new FileStream(outputPath, FileMode.Create))
-                        {
-                            fs.Write(pdfBytes, 0, pdfBytes.Length);
-                            fs.Close();
-                        }
-
+                        DownloadReport(rptname);
                     }
                 }
                 if (rptname == "ProfitSummary")
@@ -277,27 +177,7 @@ namespace SignetSSRProject.Reports
 
                     if (isReportDownload)
                     {
-                        ReportViewer1.Visible = false;
-                        string outputPath = String.Format("C:\\SignetReports\\{0} {1}.pdf", rptname, DateTime.Now.ToString("MM.dd.yyyy h.mm tt"));
-
-                        lblMessage.Text = String.Format("Report has been saved to {0}", outputPath);
-                        lblMessage.Visible = true;
-
-                        string mimeType;
-                        string encoding;
-                        string extension;
-                        string[] streams;
-                        Warning[] warnings;
-                        byte[] pdfBytes = ReportViewer1.ServerReport.Render("PDF", string.Empty, out mimeType,
-                            out encoding, out extension, out streams, out warnings);
-
-                        // save the file
-                        using (FileStream fs = new FileStream(outputPath, FileMode.Create))
-                        {
-                            fs.Write(pdfBytes, 0, pdfBytes.Length);
-                            fs.Close();
-                        }
-
+                        DownloadReport(rptname);
                     }
 
                 }
@@ -323,27 +203,7 @@ namespace SignetSSRProject.Reports
 
                     if (isReportDownload)
                     {
-                        ReportViewer1.Visible = false;
-                        string outputPath = String.Format("C:\\SignetReports\\{0} {1}.pdf", rptname, DateTime.Now.ToString("MM.dd.yyyy h.mm tt"));
-
-                        lblMessage.Text = String.Format("Report has been saved to {0}", outputPath);
-                        lblMessage.Visible = true;
-
-                        string mimeType;
-                        string encoding;
-                        string extension;
-                        string[] streams;
-                        Warning[] warnings;
-                        byte[] pdfBytes = ReportViewer1.ServerReport.Render("PDF", string.Empty, out mimeType,
-                            out encoding, out extension, out streams, out warnings);
-
-                        // save the file
-                        using (FileStream fs = new FileStream(outputPath, FileMode.Create))
-                        {
-                            fs.Write(pdfBytes, 0, pdfBytes.Length);
-                            fs.Close();
-                        }
-
+                        DownloadReport(rptname);
                     }
                 }
                 if (rptname == "Total Project Hours Worked on a given Month")
@@ -363,30 +223,37 @@ namespace SignetSSRProject.Reports
 
                     if (isReportDownload)
                     {
-                        ReportViewer1.Visible = false;
-                        string outputPath = String.Format("C:\\SignetReports\\{0} {1}.pdf", rptname, DateTime.Now.ToString("MM.dd.yyyy h.mm tt"));
-
-                        lblMessage.Text = String.Format("Report has been saved to {0}", outputPath);
-                        lblMessage.Visible = true;
-
-                        string mimeType;
-                        string encoding;
-                        string extension;
-                        string[] streams;
-                        Warning[] warnings;
-                        byte[] pdfBytes = ReportViewer1.ServerReport.Render("PDF", string.Empty, out mimeType,
-                            out encoding, out extension, out streams, out warnings);
-
-                        // save the file
-                        using (FileStream fs = new FileStream(outputPath, FileMode.Create))
-                        {
-                            fs.Write(pdfBytes, 0, pdfBytes.Length);
-                            fs.Close();
-                        }
-
+                        DownloadReport(rptname);
                     }
                 }
             }
         }
+
+        public void DownloadReport(string rptname)
+        {
+            ReportViewer1.Visible = false;
+            string outputPath = String.Format("C:\\SignetReports\\{0} {1}.pdf", rptname, DateTime.Now.ToString("MM.dd.yyyy h.mm tt"));
+
+            lblMessage.Text = String.Format("Report has been saved to {0}", outputPath);
+            lblMessage.Visible = true;
+
+            string mimeType;
+            string encoding;
+            string extension;
+            string[] streams;
+            Warning[] warnings;
+            byte[] pdfBytes = ReportViewer1.ServerReport.Render("PDF", string.Empty, out mimeType,
+                out encoding, out extension, out streams, out warnings);
+
+            // save the file
+            using (FileStream fs = new FileStream(outputPath, FileMode.Create))
+            {
+                fs.Write(pdfBytes, 0, pdfBytes.Length);
+                fs.Close();
+            }
+        
+        }
+
+
     }
 }

@@ -233,28 +233,7 @@
     <Compile Include="Reports\Master RVC.aspx.designer.cs">
       <DependentUpon>Master RVC.aspx</DependentUpon>
     </Compile>
-    <Compile Include="Reports\ReportCustomize.aspx.cs">
-      <DependentUpon>ReportCustomize.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="Reports\ReportCustomize.aspx.designer.cs">
-      <DependentUpon>ReportCustomize.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="Reports\ReportList.aspx.cs">
-      <DependentUpon>ReportList.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="Reports\ReportList.aspx.designer.cs">
-      <DependentUpon>ReportList.aspx</DependentUpon>
-    </Compile>
     <Compile Include="Reports\ReportServerNetworkCredentials.cs" />
-    <Compile Include="Reports\Reportweb.aspx.cs">
-      <DependentUpon>Reportweb.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="Reports\Reportweb.aspx.designer.cs">
-      <DependentUpon>Reportweb.aspx</DependentUpon>
-    </Compile>
     <Compile Include="SSRCommon.cs" />
     <Compile Include="Startup.cs" />
   </ItemGroup>
@@ -452,9 +431,6 @@
     <Content Include="Images\SignetTugs.jpg" />
     <Content Include="Images\SignetWarhorse.jpg" />
     <Content Include="Reports\Master RVC.aspx" />
-    <Content Include="Reports\ReportCustomize.aspx" />
-    <Content Include="Reports\ReportList.aspx" />
-    <Content Include="Reports\Reportweb.aspx" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
     <EntityDeploy Include="Models\SSRDataModel.edmx">

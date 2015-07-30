@@ -43,8 +43,8 @@
             <label class="radio-inline"> <input type="radio" name="UserRole" id="seasonWinter" value="User" checked> User </label>
            -->
 
-            @Html.RadioButton("UserRole", "admin") Administrator &nbsp;
-            @Html.RadioButton("UserRole", "user", new {@checked= "checked" }) User
+            @Html.RadioButton("UserRole", (string)ViewBag.RadAdmin) Administrator &nbsp;
+            @Html.RadioButton("UserRole", (string)ViewBag.RadUser, new { @checked = "checked" }) User
            
         </div>
     </div>

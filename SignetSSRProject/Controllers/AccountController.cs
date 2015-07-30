@@ -16,6 +16,7 @@ namespace SignetSSRProject.Controllers
     public class AccountController : Controller
     {
         private Signet_SSR_DatabaseEntities db = new Signet_SSR_DatabaseEntities();
+        
 
         public AccountController()
             : this(new UserManager<ApplicationUser>(new UserStore<ApplicationUser>(new ApplicationDbContext())),
@@ -89,6 +90,7 @@ namespace SignetSSRProject.Controllers
                     }
                 }
 
+                //attempt to login with entered user and password
                 var user = await UserManager.FindAsync(model.UserName, model.Password);
                 if (user != null)
                 {
@@ -111,6 +113,8 @@ namespace SignetSSRProject.Controllers
         [Authorize(Roles = SSRCommon.Roles.ADMINISTRATOR_ROLE)]
         public ActionResult Register()
         {
+            ViewBag.RadAdmin = SSRCommon.Roles.ADMINISTRATOR_ROLE;
+            ViewBag.RadUser = SSRCommon.Roles.USER_ROLE; 
             return View();
         }
 
@@ -121,22 +125,13 @@ namespace SignetSSRProject.Controllers
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> Register(RegisterViewModel model)
         {
+
+            ViewBag.RadAdmin = SSRCommon.Roles.ADMINISTRATOR_ROLE;
+            ViewBag.RadUser = SSRCommon.Roles.USER_ROLE; 
             if (ModelState.IsValid)
             {
-                // Change 1 - TO DO: We need to add a check to see whether a radio button
-                //indicates whether the user is an admin or a standard user.
-                //Currently all users will be registered with admin priviledges.
-
-                //Change 2 - Now changing the code for creating user with respective selected role on view page
-
                 String UserRole= model.UserRole;
-
-                if (UserRole == "admin")
-                    UserRole = SSRCommon.Roles.ADMINISTRATOR_ROLE;
-                else if(UserRole=="user")
-                    UserRole = SSRCommon.Roles.USER_ROLE;
-
-
+                                
                 bool isUserCreated = createUser(model.UserName, UserRole, model.Password);
                 if (isUserCreated)
                 {
