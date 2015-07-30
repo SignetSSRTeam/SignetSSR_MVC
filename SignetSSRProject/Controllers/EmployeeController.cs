@@ -14,7 +14,7 @@ namespace SignetSSRProject.Controllers
 {
     public class EmployeeController : Controller
     {
-        private ISC567_SSRS_DatabaseEntities db = new ISC567_SSRS_DatabaseEntities();
+        private Signet_SSR_DatabaseEntities db = new Signet_SSR_DatabaseEntities();
 
         // GET: /Employee/
         public ActionResult Index(string FirstName, string LastName)

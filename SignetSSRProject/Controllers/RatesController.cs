@@ -12,7 +12,7 @@ namespace SignetSSRProject.Controllers
 {
     public class RatesController : Controller
     {
-        private ISC567_SSRS_DatabaseEntities db = new ISC567_SSRS_DatabaseEntities();
+        private Signet_SSR_DatabaseEntities db = new Signet_SSR_DatabaseEntities();
 
         // GET: Rates
         public ActionResult Index(string JobType)

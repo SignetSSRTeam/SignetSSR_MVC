@@ -13,10 +13,10 @@ namespace SignetSSRProject.Models
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
     
-    public partial class ISC567_SSRS_DatabaseEntities : DbContext
+    public partial class Signet_SSR_DatabaseEntities : DbContext
     {
-        public ISC567_SSRS_DatabaseEntities()
-            : base("name=ISC567_SSRS_DatabaseEntities")
+        public Signet_SSR_DatabaseEntities()
+            : base("name=Signet_SSR_DatabaseEntities")
         {
         }
     

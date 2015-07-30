@@ -15,7 +15,7 @@ namespace SignetSSRProject.Controllers
 {
     public class ReportsController : Controller
     {
-        private ISC567_SSRS_DatabaseEntities db = new ISC567_SSRS_DatabaseEntities();
+        private Signet_SSR_DatabaseEntities db = new Signet_SSR_DatabaseEntities();
         //
         // GET: /Reports/
         public ActionResult Index()

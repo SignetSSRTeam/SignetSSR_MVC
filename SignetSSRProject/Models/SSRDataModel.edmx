@@ -489,7 +489,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <EntityContainer Name="ISC567_SSRS_DatabaseEntities" annotation:LazyLoadingEnabled="true">
+        <EntityContainer Name="Signet_SSR_DatabaseEntities" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="Attendances" EntityType="Self.Attendance" />
           <EntitySet Name="Customers" EntityType="Self.Customer" />
           <EntitySet Name="Employees" EntityType="Self.Employee" />
@@ -558,7 +558,7 @@
     <!-- C-S mapping content -->
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
-        <EntityContainerMapping StorageEntityContainer="ISC567_SSRS_DatabaseModelStoreContainer" CdmEntityContainer="ISC567_SSRS_DatabaseEntities">
+        <EntityContainerMapping StorageEntityContainer="ISC567_SSRS_DatabaseModelStoreContainer" CdmEntityContainer="Signet_SSR_DatabaseEntities">
           <EntitySetMapping Name="Attendances">
             <EntityTypeMapping TypeName="ISC567_SSRS_DatabaseModel.Attendance">
               <MappingFragment StoreEntitySet="Attendance">

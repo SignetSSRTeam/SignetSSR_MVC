@@ -15,7 +15,7 @@ namespace SignetSSRProject.Controllers
     [Authorize]
     public class AccountController : Controller
     {
-        private ISC567_SSRS_DatabaseEntities db = new ISC567_SSRS_DatabaseEntities();
+        private Signet_SSR_DatabaseEntities db = new Signet_SSR_DatabaseEntities();
 
         public AccountController()
             : this(new UserManager<ApplicationUser>(new UserStore<ApplicationUser>(new ApplicationDbContext())),
