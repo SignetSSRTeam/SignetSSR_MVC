@@ -21,6 +21,7 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "ReportStoredProcs", "ReportStoredProcs", "{1EDAD81A-2111-40B6-9325-CB88CAB0D07F}"
 	ProjectSection(SolutionItems) = preProject
 		5.2EmployeeHoursWOrkedWeekly.sql = 5.2EmployeeHoursWOrkedWeekly.sql
+		5.4ProjectHoursWorkedWeekly.sql = 5.4ProjectHoursWorkedWeekly.sql
 		5.5ProfitSummaryStoredProc.sql = 5.5ProfitSummaryStoredProc.sql
 	EndProjectSection
 EndProject
