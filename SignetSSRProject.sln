@@ -9,6 +9,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Resources", "Resources", "{
 	ProjectSection(SolutionItems) = preProject
 		DeploymentScript.sql = DeploymentScript.sql
 		LatestTableCreationScript.sql = LatestTableCreationScript.sql
+		StoredProcFuncCreation.sql = StoredProcFuncCreation.sql
 	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "SQL Scripts", "SQL Scripts", "{CF38F897-6ABA-4426-BD3C-3C093D0E2F09}"
