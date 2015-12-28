@@ -43,8 +43,6 @@
           <Property Name="JobTitle" Type="varchar" MaxLength="30" Nullable="false" />
           <Property Name="Supervisor" Type="bit" />
           <Property Name="ContractLabor" Type="bit" />
-          <Property Name="WageRateRT" Type="money" />
-          <Property Name="WageRateOT" Type="money" />
           <Property Name="HomePhone" Type="char" MaxLength="15" />
           <Property Name="CellPhone" Type="char" MaxLength="15" />
           <Property Name="Address" Type="varchar" MaxLength="100" />
@@ -117,6 +115,7 @@
           <Property Name="RateRT" Type="money" Nullable="false" />
           <Property Name="RateOT" Type="money" Nullable="false" />
           <Property Name="LaborHourlyCost" Type="decimal" Precision="18" Scale="0" />
+          <Property Name="LaborOverheadCost" Type="decimal" Precision="18" Scale="0" />
         </EntityType>
         <EntityType Name="WageHistory">
           <Key>
@@ -124,8 +123,8 @@
           </Key>
           <Property Name="WageHistoryID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="EmployeeID" Type="int" Nullable="false" />
-          <Property Name="WageRT" Type="int" Nullable="false" />
-          <Property Name="WageOT" Type="int" Nullable="false" />
+          <Property Name="WageRT" Type="money" Nullable="false" />
+          <Property Name="WageOT" Type="money" Nullable="false" />
           <Property Name="DateStart" Type="date" />
           <Property Name="DateEnd" Type="date" />
           <Property Name="IsCurrent" Type="bit" Nullable="false" />
@@ -313,8 +312,6 @@
           <Property Name="JobTitle" Type="String" MaxLength="30" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="Supervisor" Type="Boolean" />
           <Property Name="ContractLabor" Type="Boolean" />
-          <Property Name="WageRateRT" Type="Decimal" Precision="19" Scale="4" />
-          <Property Name="WageRateOT" Type="Decimal" Precision="19" Scale="4" />
           <Property Name="HomePhone" Type="String" MaxLength="15" FixedLength="true" Unicode="false" />
           <Property Name="CellPhone" Type="String" MaxLength="15" FixedLength="true" Unicode="false" />
           <Property Name="Address" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
@@ -322,7 +319,7 @@
           <Property Name="Notes" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
           <NavigationProperty Name="Attendances" Relationship="Self.FK_Attendance_Employee" FromRole="Employee" ToRole="Attendance" />
           <NavigationProperty Name="HoursWorkeds" Relationship="Self.FK_HoursWorked_Employee" FromRole="Employee" ToRole="HoursWorked" />
-          <NavigationProperty Name="WageHistories" Relationship="Self.FK_WageHistory_Employee" FromRole="Employee" ToRole="WageHistory" />
+          <NavigationProperty Name="WageHistories" Relationship="ISC567_SSRS_DatabaseModel.FK_WageHistory_Employee" FromRole="Employee" ToRole="WageHistory" />
         </EntityType>
         <EntityType Name="HoursWorked">
           <Key>
@@ -390,20 +387,7 @@
           <Property Name="RateOT" Type="Decimal" Precision="19" Scale="4" Nullable="false" />
           <NavigationProperty Name="Jobs" Relationship="Self.FK_Job_Rate" FromRole="Rate" ToRole="Job" />
           <Property Name="LaborHourlyCost" Type="Decimal" Precision="18" Scale="0" />
-        </EntityType>
-        <EntityType Name="WageHistory">
-          <Key>
-            <PropertyRef Name="WageHistoryID" />
-          </Key>
-          <Property Name="WageHistoryID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="EmployeeID" Type="Int32" Nullable="false" />
-          <Property Name="WageRT" Type="Int32" Nullable="false" />
-          <Property Name="WageOT" Type="Int32" Nullable="false" />
-          <Property Name="DateStart" Type="DateTime" Precision="0" />
-          <Property Name="DateEnd" Type="DateTime" Precision="0" />
-          <Property Name="IsCurrent" Type="Boolean" Nullable="false" />
-          <NavigationProperty Name="Employee" Relationship="Self.FK_WageHistory_Employee" FromRole="WageHistory" ToRole="Employee" />
-          <NavigationProperty Name="HoursWorkeds" Relationship="ISC567_SSRS_DatabaseModel.FK_HoursWorked_WageHistory" FromRole="WageHistory" ToRole="HoursWorked" />
+          <Property Name="LaborOverheadCost" Type="Decimal" Precision="18" Scale="0" />
         </EntityType>
         <Association Name="FK_Attendance_Employee">
           <End Role="Employee" Type="Self.Employee" Multiplicity="1" />
@@ -437,18 +421,6 @@
               <PropertyRef Name="EmployeeID" />
             </Principal>
             <Dependent Role="HoursWorked">
-              <PropertyRef Name="EmployeeID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_WageHistory_Employee">
-          <End Role="Employee" Type="Self.Employee" Multiplicity="1" />
-          <End Role="WageHistory" Type="Self.WageHistory" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Employee">
-              <PropertyRef Name="EmployeeID" />
-            </Principal>
-            <Dependent Role="WageHistory">
               <PropertyRef Name="EmployeeID" />
             </Dependent>
           </ReferentialConstraint>
@@ -497,7 +469,6 @@
           <EntitySet Name="Jobs" EntityType="Self.Job" />
           <EntitySet Name="MaterialsExpenses" EntityType="Self.MaterialsExpense" />
           <EntitySet Name="Rates" EntityType="Self.Rate" />
-          <EntitySet Name="WageHistories" EntityType="Self.WageHistory" />
           <AssociationSet Name="FK_Attendance_Employee" Association="Self.FK_Attendance_Employee">
             <End Role="Employee" EntitySet="Employees" />
             <End Role="Attendance" EntitySet="Attendances" />
@@ -509,10 +480,6 @@
           <AssociationSet Name="FK_HoursWorked_Employee" Association="Self.FK_HoursWorked_Employee">
             <End Role="Employee" EntitySet="Employees" />
             <End Role="HoursWorked" EntitySet="HoursWorkeds" />
-          </AssociationSet>
-          <AssociationSet Name="FK_WageHistory_Employee" Association="Self.FK_WageHistory_Employee">
-            <End Role="Employee" EntitySet="Employees" />
-            <End Role="WageHistory" EntitySet="WageHistories" />
           </AssociationSet>
           <AssociationSet Name="FK_HoursWorked_Job" Association="Self.FK_HoursWorked_Job">
             <End Role="Job" EntitySet="Jobs" />
@@ -526,12 +493,52 @@
             <End Role="Job" EntitySet="Jobs" />
             <End Role="MaterialsExpense" EntitySet="MaterialsExpenses" />
           </AssociationSet>
+          <EntitySet Name="LoginAudits" EntityType="ISC567_SSRS_DatabaseModel.LoginAudit" />
+          <EntitySet Name="WageHistories" EntityType="ISC567_SSRS_DatabaseModel.WageHistory" />
+          <AssociationSet Name="FK_WageHistory_Employee" Association="ISC567_SSRS_DatabaseModel.FK_WageHistory_Employee">
+            <End Role="Employee" EntitySet="Employees" />
+            <End Role="WageHistory" EntitySet="WageHistories" />
+          </AssociationSet>
           <AssociationSet Name="FK_HoursWorked_WageHistory" Association="ISC567_SSRS_DatabaseModel.FK_HoursWorked_WageHistory">
             <End Role="WageHistory" EntitySet="WageHistories" />
             <End Role="HoursWorked" EntitySet="HoursWorkeds" />
           </AssociationSet>
-          <EntitySet Name="LoginAudits" EntityType="ISC567_SSRS_DatabaseModel.LoginAudit" />
         </EntityContainer>
+        <EntityType Name="LoginAudit">
+          <Key>
+            <PropertyRef Name="LoginAuditID" />
+          </Key>
+          <Property Name="LoginAuditID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="UserName" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Activity" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="TimeRecorded" Type="DateTime" Precision="3" />
+        </EntityType>
+        <EntityType Name="WageHistory">
+          <Key>
+            <PropertyRef Name="WageHistoryID" />
+          </Key>
+          <Property Name="WageHistoryID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="EmployeeID" Type="Int32" Nullable="false" />
+          <Property Name="WageRT" Type="Decimal" Nullable="false" Precision="19" Scale="4" />
+          <Property Name="WageOT" Type="Decimal" Nullable="false" Precision="19" Scale="4" />
+          <Property Name="DateStart" Type="DateTime" Precision="0" />
+          <Property Name="DateEnd" Type="DateTime" Precision="0" />
+          <Property Name="IsCurrent" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="Employee" Relationship="ISC567_SSRS_DatabaseModel.FK_WageHistory_Employee" FromRole="WageHistory" ToRole="Employee" />
+          <NavigationProperty Name="HoursWorkeds" Relationship="ISC567_SSRS_DatabaseModel.FK_HoursWorked_WageHistory" FromRole="WageHistory" ToRole="HoursWorked" />
+        </EntityType>
+        <Association Name="FK_WageHistory_Employee">
+          <End Type="ISC567_SSRS_DatabaseModel.Employee" Role="Employee" Multiplicity="1" />
+          <End Type="ISC567_SSRS_DatabaseModel.WageHistory" Role="WageHistory" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Employee">
+              <PropertyRef Name="EmployeeID" />
+            </Principal>
+            <Dependent Role="WageHistory">
+              <PropertyRef Name="EmployeeID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_HoursWorked_WageHistory">
           <End Type="ISC567_SSRS_DatabaseModel.WageHistory" Role="WageHistory" Multiplicity="0..1" />
           <End Type="ISC567_SSRS_DatabaseModel.HoursWorked" Role="HoursWorked" Multiplicity="*" />
@@ -544,15 +551,6 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <EntityType Name="LoginAudit">
-          <Key>
-            <PropertyRef Name="LoginAuditID" />
-          </Key>
-          <Property Name="LoginAuditID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="UserName" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Name="Activity" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
-          <Property Name="TimeRecorded" Type="DateTime" Precision="3" />
-        </EntityType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -598,8 +596,6 @@
                 <ScalarProperty Name="JobTitle" ColumnName="JobTitle" />
                 <ScalarProperty Name="Supervisor" ColumnName="Supervisor" />
                 <ScalarProperty Name="ContractLabor" ColumnName="ContractLabor" />
-                <ScalarProperty Name="WageRateRT" ColumnName="WageRateRT" />
-                <ScalarProperty Name="WageRateOT" ColumnName="WageRateOT" />
                 <ScalarProperty Name="HomePhone" ColumnName="HomePhone" />
                 <ScalarProperty Name="CellPhone" ColumnName="CellPhone" />
                 <ScalarProperty Name="Address" ColumnName="Address" />
@@ -661,25 +657,13 @@
           <EntitySetMapping Name="Rates">
             <EntityTypeMapping TypeName="ISC567_SSRS_DatabaseModel.Rate">
               <MappingFragment StoreEntitySet="Rate">
+                <ScalarProperty Name="LaborOverheadCost" ColumnName="LaborOverheadCost" />
                 <ScalarProperty Name="LaborHourlyCost" ColumnName="LaborHourlyCost" />
                 <ScalarProperty Name="RateID" ColumnName="RateID" />
                 <ScalarProperty Name="JobType" ColumnName="JobType" />
                 <ScalarProperty Name="Supervisor" ColumnName="Supervisor" />
                 <ScalarProperty Name="RateRT" ColumnName="RateRT" />
                 <ScalarProperty Name="RateOT" ColumnName="RateOT" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="WageHistories">
-            <EntityTypeMapping TypeName="ISC567_SSRS_DatabaseModel.WageHistory">
-              <MappingFragment StoreEntitySet="WageHistory">
-                <ScalarProperty Name="WageHistoryID" ColumnName="WageHistoryID" />
-                <ScalarProperty Name="EmployeeID" ColumnName="EmployeeID" />
-                <ScalarProperty Name="WageRT" ColumnName="WageRT" />
-                <ScalarProperty Name="WageOT" ColumnName="WageOT" />
-                <ScalarProperty Name="DateStart" ColumnName="DateStart" />
-                <ScalarProperty Name="DateEnd" ColumnName="DateEnd" />
-                <ScalarProperty Name="IsCurrent" ColumnName="IsCurrent" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -690,6 +674,19 @@
                 <ScalarProperty Name="Activity" ColumnName="Activity" />
                 <ScalarProperty Name="UserName" ColumnName="UserName" />
                 <ScalarProperty Name="LoginAuditID" ColumnName="LoginAuditID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="WageHistories">
+            <EntityTypeMapping TypeName="ISC567_SSRS_DatabaseModel.WageHistory">
+              <MappingFragment StoreEntitySet="WageHistory">
+                <ScalarProperty Name="IsCurrent" ColumnName="IsCurrent" />
+                <ScalarProperty Name="DateEnd" ColumnName="DateEnd" />
+                <ScalarProperty Name="DateStart" ColumnName="DateStart" />
+                <ScalarProperty Name="WageOT" ColumnName="WageOT" />
+                <ScalarProperty Name="WageRT" ColumnName="WageRT" />
+                <ScalarProperty Name="EmployeeID" ColumnName="EmployeeID" />
+                <ScalarProperty Name="WageHistoryID" ColumnName="WageHistoryID" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

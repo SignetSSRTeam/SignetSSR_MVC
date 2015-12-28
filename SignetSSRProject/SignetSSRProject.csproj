@@ -188,6 +188,7 @@
     <Compile Include="Models\Employee.cs">
       <DependentUpon>SSRDataModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\EmployeeViewModel.cs" />
     <Compile Include="Models\HoursWorked.cs">
       <DependentUpon>SSRDataModel.tt</DependentUpon>
     </Compile>

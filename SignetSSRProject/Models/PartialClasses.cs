@@ -6,8 +6,8 @@ using System.ComponentModel.DataAnnotations;
 
 namespace SignetSSRProject.Models
 {
-    [MetadataType(typeof(EmployeeMetadata))]
-    public partial class Employee
+    [MetadataType(typeof(EmployeeViewModelMetadata))]
+    public partial class EmployeeViewModel
     {
     }
 

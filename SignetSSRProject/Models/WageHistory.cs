@@ -22,8 +22,8 @@ namespace SignetSSRProject.Models
     
         public int WageHistoryID { get; set; }
         public int EmployeeID { get; set; }
-        public int WageRT { get; set; }
-        public int WageOT { get; set; }
+        public decimal WageRT { get; set; }
+        public decimal WageOT { get; set; }
         public Nullable<System.DateTime> DateStart { get; set; }
         public Nullable<System.DateTime> DateEnd { get; set; }
         public bool IsCurrent { get; set; }

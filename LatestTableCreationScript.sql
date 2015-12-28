@@ -48,8 +48,6 @@ CREATE TABLE Employee (
 	JobTitle VARCHAR(30) NOT NULL,
 	Supervisor BIT NULL,
 	ContractLabor BIT NULL,
-	WageRateRT MONEY NULL,
-	WageRateOT MONEY NULL,
 	HomePhone CHAR(15) NULL,
 	CellPhone CHAR(15) NULL,
 	Address VARCHAR(100) NULL,
@@ -81,7 +79,8 @@ CREATE TABLE Rate (
 	Supervisor Bit,
 	RateRT MONEY NOT NULL,
 	RateOT MONEY NOT NULL,
-	LaborHourlyCost DECIMAL NULL
+	LaborHourlyCost DECIMAL NULL,	
+	LaborOverheadCost DECIMAL NULL
 	)
 GO
 
@@ -101,8 +100,8 @@ GO
 CREATE TABLE WageHistory (
 	WageHistoryID INT IDENTITY (1,1) PRIMARY KEY,
 	EmployeeID INT NOT NULL,
-	WageRT INT NOT NULL,
-	WageOT INT NOT NULL,
+	WageRT MONEY NOT NULL,
+	WageOT MONEY NOT NULL,
 	DateStart DATE NULL, 
 	DateEnd DATE NULL,
 	IsCurrent BIT NOT NULL
@@ -200,12 +199,12 @@ VALUES ('In-house',0,49,49);
 PRINT ('table Rate Inserted');
 SELECT * FROM Rate;
 
-INSERT INTO Employee (FirstName,LastName, JobTitle, SuperVisor,ContractLabor,WageRateRT,WageRateOT,HomePhone,CellPhone,Address,EmailAddress,Notes)
-VALUES('Donnie','Tibbetts', 'Welder',0,1,40.00,60.00,'(123)-234-2344','(456)-543-5697','12,cdr street,Pascagoula,MS-39581','xjcijjcdc@aol.com','');
-INSERT INTO Employee (FirstName,LastName, JobTitle, SuperVisor,ContractLabor,WageRateRT,WageRateOT,HomePhone,CellPhone,Address,EmailAddress,Notes)
-VALUES('Liza','Guzman',  'Programmer',0,1,60.00,80.00,'(123)-264-2944','(456)-533-5297','3452,abc street,Pascagoula,MS-39581','tyjcijdc@aol.com','');
-INSERT INTO Employee (FirstName,LastName, JobTitle, SuperVisor,ContractLabor,WageRateRT,WageRateOT,HomePhone,CellPhone,Address,EmailAddress,Notes)
-VALUES('Phil','Catlett', 'Cutter',0,1,42.00,62.00,'(123)-234-2394','(456)-243-5197','4562,vfdt street,Pascagoula,MS-39581','mnijjcdc@aol.com','');
+INSERT INTO Employee (FirstName,LastName, JobTitle, SuperVisor,ContractLabor,HomePhone,CellPhone,Address,EmailAddress,Notes)
+VALUES('Donnie','Tibbetts', 'Welder',0,1,'(123)-234-2344','(456)-543-5697','12,cdr street,Pascagoula,MS-39581','xjcijjcdc@aol.com','');
+INSERT INTO Employee (FirstName,LastName, JobTitle, SuperVisor,ContractLabor,HomePhone,CellPhone,Address,EmailAddress,Notes)
+VALUES('Liza','Guzman',  'Programmer',0,1,'(123)-264-2944','(456)-533-5297','3452,abc street,Pascagoula,MS-39581','tyjcijdc@aol.com','');
+INSERT INTO Employee (FirstName,LastName, JobTitle, SuperVisor,ContractLabor,HomePhone,CellPhone,Address,EmailAddress,Notes)
+VALUES('Phil','Catlett', 'Cutter',0,1,'(123)-234-2394','(456)-243-5197','4562,vfdt street,Pascagoula,MS-39581','mnijjcdc@aol.com','');
 GO
 PRINT ('table Employee Inserted');
 GO
@@ -271,11 +270,11 @@ PRINT ('table HoursWorked Inserted');
 GO
 
 INSERT INTO MaterialsExpense(Expense,JobID,ItemNumber,ExpenseDate,InvoiceReceived,ExpenseDescription,PONumber,InvoiceNumber,TaxIncluded,TaxPercentage,MarkUpPercentage)
-VALUES(1000,1,1,3/3/2015,1,Null,'1234567','00003746',1,6,15);
+VALUES(1000,1,1,'3/3/2015',1,Null,'1234567','00003746',1,6,15);
 INSERT INTO MaterialsExpense(Expense,JobID,ItemNumber,ExpenseDate,InvoiceReceived,ExpenseDescription,PONumber,InvoiceNumber,TaxIncluded,TaxPercentage,MarkUpPercentage)
-VALUES(20000,2,2,4/4/2014,0,Null,'3747367','93847612',1,6,12);
+VALUES(20000,2,2,'4/4/2014',0,Null,'3747367','93847612',1,6,12);
 INSERT INTO MaterialsExpense(Expense,JobID,ItemNumber,ExpenseDate,InvoiceReceived,ExpenseDescription,PONumber,InvoiceNumber,TaxIncluded,TaxPercentage,MarkUpPercentage)
-VALUES(333333,3,3,3/3/2015,Null,'description1','1237654','09090909',1,6,15);
+VALUES(333333,3,3,'3/3/2015',Null,'description1','1237654','09090909',1,6,15);
 GO
 PRINT ('table MaterialsExpense Inserted');
 GO

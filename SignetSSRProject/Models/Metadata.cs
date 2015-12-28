@@ -3,10 +3,11 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace SignetSSRProject.Models
 {
-    public class EmployeeMetadata
+    public class EmployeeViewModelMetadata
     {
         [Required]
         [StringLength(50)]
@@ -30,11 +31,11 @@ namespace SignetSSRProject.Models
         public Nullable<bool> ContractLabor;
 
         [Required]
-        [RegularExpression(@"[0-9]*\.?[0-9]+", ErrorMessage = "{0} must be a Number.")]
+        [RegularExpression(@"[0-9]*\.?[0-9]+", ErrorMessage = "{0} must be a Number.")]        
         public Nullable<decimal> WageRateRT;
 
         [Required]
-        [RegularExpression(@"[0-9]*\.?[0-9]+", ErrorMessage = "{0} must be a Number.")]
+        [RegularExpression(@"[0-9]*\.?[0-9]+", ErrorMessage = "{0} must be a Number.")]        
         public Nullable<decimal> WageRateOT;
     }
 

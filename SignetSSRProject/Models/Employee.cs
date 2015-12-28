@@ -28,8 +28,6 @@ namespace SignetSSRProject.Models
         public string JobTitle { get; set; }
         public Nullable<bool> Supervisor { get; set; }
         public Nullable<bool> ContractLabor { get; set; }
-        public Nullable<decimal> WageRateRT { get; set; }
-        public Nullable<decimal> WageRateOT { get; set; }
         public string HomePhone { get; set; }
         public string CellPhone { get; set; }
         public string Address { get; set; }

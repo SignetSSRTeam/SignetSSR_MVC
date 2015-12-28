@@ -26,6 +26,7 @@ namespace SignetSSRProject.Models
         public decimal RateRT { get; set; }
         public decimal RateOT { get; set; }
         public Nullable<decimal> LaborHourlyCost { get; set; }
+        public Nullable<decimal> LaborOverheadCost { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Job> Jobs { get; set; }

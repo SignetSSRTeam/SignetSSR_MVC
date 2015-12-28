@@ -32,7 +32,7 @@ namespace SignetSSRProject.Models
         public virtual DbSet<Job> Jobs { get; set; }
         public virtual DbSet<MaterialsExpense> MaterialsExpenses { get; set; }
         public virtual DbSet<Rate> Rates { get; set; }
-        public virtual DbSet<WageHistory> WageHistories { get; set; }
         public virtual DbSet<LoginAudit> LoginAudits { get; set; }
+        public virtual DbSet<WageHistory> WageHistories { get; set; }
     }
 }

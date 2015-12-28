@@ -27,7 +27,7 @@ namespace SignetSSRProject.Controllers
             var result = from employee in employees
                          join wages in wageHistory on employee.EmployeeID equals wages.EmployeeID
                          where (wages.IsCurrent)
-                         select new Employee
+                         select new EmployeeViewModel
                          {
                              EmployeeID = employee.EmployeeID,
                              FirstName = employee.FirstName,
@@ -63,12 +63,36 @@ namespace SignetSSRProject.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
+            
+            //Find Employee
             Employee employee = db.Employees.Find(id);
             if (employee == null)
             {
                 return HttpNotFound();
             }
-            return View(employee);
+
+            //Obtain current wage detail
+            WageHistory currentWageHistory = db.WageHistories
+                                               .Where(wh => wh.EmployeeID == id && wh.IsCurrent)
+                                               .FirstOrDefault();
+
+            //Create employeeViewModel with employee detail
+            EmployeeViewModel employeeViewModel = new EmployeeViewModel();
+            employeeViewModel.EmployeeID = employee.EmployeeID;
+            employeeViewModel.FirstName = employee.FirstName;
+            employeeViewModel.LastName = employee.LastName;
+            employeeViewModel.JobTitle = employee.JobTitle;
+            employeeViewModel.Supervisor = employee.Supervisor;
+            employeeViewModel.ContractLabor = employee.ContractLabor;
+            employeeViewModel.WageRateRT = currentWageHistory.WageRT;
+            employeeViewModel.WageRateOT = currentWageHistory.WageOT;
+            employeeViewModel.HomePhone = employee.HomePhone;
+            employeeViewModel.CellPhone = employee.CellPhone;
+            employeeViewModel.EmailAddress = employee.EmailAddress;
+            employeeViewModel.Address = employee.Address;
+            employeeViewModel.Notes = employee.Notes;
+            
+            return View(employeeViewModel);
         }
 
         // GET: /Employee/Create
@@ -82,27 +106,43 @@ namespace SignetSSRProject.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include="EmployeeID,FirstName,LastName,JobTitle,Supervisor,ContractLabor,WageRateRT,WageRateOT,HomePhone,CellPhone,Address,EmailAddress,Notes")] Employee employee)
+        public ActionResult Create([Bind(Include="EmployeeID,FirstName,LastName,JobTitle,Supervisor,ContractLabor,WageRateRT,WageRateOT,HomePhone,CellPhone,Address,EmailAddress,Notes")] EmployeeViewModel employeeViewModel)
         {
             if (ModelState.IsValid)
             {
+                // save data into the employee table based on the information in the EmployeeViewModel
+                Employee employee = new Employee();
+                employee.EmployeeID = employeeViewModel.EmployeeID;
+                employee.FirstName = employeeViewModel.FirstName;
+                employee.LastName = employeeViewModel.LastName;
+                employee.JobTitle = employeeViewModel.JobTitle;
+                employee.Supervisor = employeeViewModel.Supervisor;
+                employee.ContractLabor = employeeViewModel.ContractLabor;
+                employee.HomePhone = employeeViewModel.HomePhone;
+                employee.CellPhone = employeeViewModel.CellPhone;
+                employee.Address = employeeViewModel.Address;
+                employee.EmailAddress = employeeViewModel.EmailAddress;
+                employee.Notes = employeeViewModel.Notes;
+
                 db.Employees.Add(employee);
                 db.SaveChanges();
+                
                 int employeeCount = db.Employees.ToList().Count();
                 int EmployeeId = db.Employees.ToList()[employeeCount - 1].EmployeeID;
                 WageHistory wageHistory = new WageHistory();
                 wageHistory.EmployeeID = EmployeeId;
-                wageHistory.WageOT = (Int32)employee.WageRateOT;
-                wageHistory.WageRT = (Int32)employee.WageRateRT;
+                wageHistory.WageOT = employeeViewModel.WageRateOT;
+                wageHistory.WageRT = employeeViewModel.WageRateRT;
                 wageHistory.IsCurrent = true;
                 wageHistory.DateStart = DateTime.Now.Date;
+                
                 db.WageHistories.Add(wageHistory);
                 db.SaveChanges();
 
                 return RedirectToAction("Index");
             }
 
-            return View(employee);
+            return View(employeeViewModel);
         }
 
         // GET: /Employee/Edit/5
@@ -117,12 +157,29 @@ namespace SignetSSRProject.Controllers
             {
                 return HttpNotFound();
             }
+
+            // Get the current wage of the employee
             List<WageHistory> wageHistory = db.WageHistories.Where(x => x.EmployeeID == id && x.IsCurrent).ToList();
             WageHistory wh = wageHistory[0];
-            employee.WageRateOT = wh.WageOT;
-            employee.WageRateRT = wh.WageRT;
+
+            // Create an employeeviewmodel and populate it with the employee details
+            EmployeeViewModel employeeViewModel = new EmployeeViewModel();
+            
+            employeeViewModel.EmployeeID = employee.EmployeeID;
+            employeeViewModel.FirstName = employee.FirstName;
+            employeeViewModel.LastName = employee.LastName;
+            employeeViewModel.JobTitle = employee.JobTitle;
+            employeeViewModel.Supervisor = employee.Supervisor;
+            employeeViewModel.ContractLabor = employee.ContractLabor;
+            employeeViewModel.HomePhone = employee.HomePhone;
+            employeeViewModel.CellPhone = employee.CellPhone;
+            employeeViewModel.Address = employee.Address;
+            employeeViewModel.EmailAddress = employee.EmailAddress;
+            employeeViewModel.Notes = employee.Notes;
+            employeeViewModel.WageRateOT = wh.WageOT;
+            employeeViewModel.WageRateRT = wh.WageRT;
            
-            return View(employee);
+            return View(employeeViewModel);
         }
 
         // POST: /Employee/Edit/5
@@ -130,7 +187,7 @@ namespace SignetSSRProject.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include="EmployeeID,FirstName,LastName,JobTitle,Supervisor,ContractLabor,WageRateRT,WageRateOT,HomePhone,CellPhone,Address,EmailAddress,Notes")] Employee employee)
+        public ActionResult Edit([Bind(Include="EmployeeID,FirstName,LastName,JobTitle,Supervisor,ContractLabor,HomePhone,CellPhone,Address,EmailAddress,Notes")] Employee employee)
         {
             if (ModelState.IsValid)
             {
@@ -153,8 +210,28 @@ namespace SignetSSRProject.Controllers
             {
                 return HttpNotFound();
             }
-           
-            return View(employee);
+
+            // Get the current wage of the employee
+            WageHistory wageHistory = db.WageHistories.Where(x => x.EmployeeID == id && x.IsCurrent).FirstOrDefault();            
+
+            // Create an employeeviewmodel and populate it with the employee details
+            EmployeeViewModel employeeViewModel = new EmployeeViewModel();
+
+            employeeViewModel.EmployeeID = employee.EmployeeID;
+            employeeViewModel.FirstName = employee.FirstName;
+            employeeViewModel.LastName = employee.LastName;
+            employeeViewModel.JobTitle = employee.JobTitle;
+            employeeViewModel.Supervisor = employee.Supervisor;
+            employeeViewModel.ContractLabor = employee.ContractLabor;
+            employeeViewModel.HomePhone = employee.HomePhone;
+            employeeViewModel.CellPhone = employee.CellPhone;
+            employeeViewModel.Address = employee.Address;
+            employeeViewModel.EmailAddress = employee.EmailAddress;
+            employeeViewModel.Notes = employee.Notes;
+            employeeViewModel.WageRateOT = wageHistory.WageOT;
+            employeeViewModel.WageRateRT = wageHistory.WageRT;
+
+            return View(employeeViewModel);
         }
 
         // POST: /Employee/Delete/5
@@ -162,17 +239,20 @@ namespace SignetSSRProject.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-           // db.WageHistories.Remove
-
+           
+            // Remove all wage history records associated with this employee
             List<WageHistory> wageHistories = db.WageHistories.Where(x => x.EmployeeID == id && x.IsCurrent).ToList();
             foreach (WageHistory wageHistory in wageHistories)
             {
                 db.WageHistories.Remove(wageHistory);
             }
             db.SaveChanges();
+            
+            // Delete Employee Record
             Employee employee = db.Employees.Find(id);
             db.Employees.Remove(employee);
             db.SaveChanges();
+            
             return RedirectToAction("Index");
         }
 
