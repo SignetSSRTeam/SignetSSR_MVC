@@ -58,3 +58,17 @@ function validateMaterials(item) {
         return true;
     };
 }
+
+
+function validateWageHistory(item) {
+    if ($.isNumeric(item.WageRT) == false) {
+        alert(item.WageRT);
+        bootstrap_alert.warning("ERROR! Row not saved. Invalid Wage Rate RT. Make sure that the value for Wage Rate RT is numeric. Please hit F5 or refresh Screen");
+        return false;
+    } else if ($.isNumeric(item.WageOT) == false) {
+        bootstrap_alert.warning("ERROR! Row not saved. Invalid Wage Rate OT. Make sure that the value for Wage Rate OT is numeric. Please hit F5 or refresh Screen");
+        return false;
+    } else {
+        return true;
+    };
+}

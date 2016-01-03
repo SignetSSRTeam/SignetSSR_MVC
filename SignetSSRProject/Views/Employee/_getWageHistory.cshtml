@@ -24,9 +24,8 @@
 
 <script src="/Scripts/Employees/wagehistory.js"></script>
 
-<div id="jsGrid">
-
-</div>
+<div id="error_placeholder"></div>
+<section id="jsGrid"></section>
 
 @using (Html.BeginForm("saveWageHistory", "Employee", FormMethod.Post, new { @class = "modal-form", @role = "form" }))
 {

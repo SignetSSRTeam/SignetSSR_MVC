@@ -31,23 +31,31 @@
 
             insertItem: function (item) {
                 delete item.WageHistoryID;
-                item.EmployeeID = employeeID;
-                return $.ajax({
-                    type: "POST",
-                    url: "/Employee/InsertWageHistoryData",
-                    data: item,
-                    dataType: "json"
-                });
+                if (validateWageHistory(item)) {
+                    item.EmployeeID = employeeID;
+                    return $.ajax({
+                        type: "POST",
+                        url: "/Employee/InsertWageHistoryData",
+                        data: item,
+                        dataType: "json"
+                    });
+                } else {
+                    return nothing; //Work around: Force a javascript error to prevent the grid from loading
+                }
             },
 
             updateItem: function (item) {
                 item.EmployeeID = employeeID;
-                return $.ajax({
-                    type: "POST",
-                    url: "/Employee/UpdateWageHistoryData",
-                    data: item,
-                    dataType: "json"
-                });
+                if (validateWageHistory(item)) {
+                    return $.ajax({
+                        type: "POST",
+                        url: "/Employee/UpdateWageHistoryData",
+                        data: item,
+                        dataType: "json"
+                    });
+                } else {
+                    return nothing; //Work around: Force a javascript error to prevent the grid from loading
+                }
             },
 
             deleteItem: function (item) {
@@ -63,8 +71,8 @@
 
         fields: [
             { title: "ID", name: "WageHistoryID", width: 25, align: "center" },
-            { title: "Wage RT", name: "WageRT", type: "number", width: 50, itemTemplate: function (value) { return "$" + value.toFixed(2); }, align: "center" },
-            { title: "Wage OT", name: "WageOT", type: "number", width: 50, itemTemplate: function (value) { return "$" + value.toFixed(2); }, align: "center" },
+            { title: "Wage RT", name: "WageRT", type: "text", width: 50, itemTemplate: function (value) { return "$" + parseFloat(value).toFixed(2); }, align: "center" },
+            { title: "Wage OT", name: "WageOT", type: "text", width: 50, itemTemplate: function (value) { return "$" + parseFloat(value).toFixed(2); }, align: "center" },
             { title: "Start Date", name: "DateStart", type: "text", width: 50, align: "center" },
             { title: "End Date", name: "DateEnd", type: "text", width: 50, align: "center" },
             { title: "Is Current", name: "IsCurrent", type: "checkbox", width: 35 },
